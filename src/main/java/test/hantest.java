@@ -15,9 +15,11 @@ public class hantest {
         CustomDictionary.insert("北京", "ns 1024");
 
         Segment seg=HanLP.newSegment().enablePlaceRecognize(true);
-        List<Term> list=seg.seg("北京市果网科技司");
+        List<Term> list=seg.seg("北京");
         for(Term t:list){
             System.out.println(t.toString());
         }
     }
+
+
 }

@@ -1,0 +1,133 @@
+<root>
+
+    <read>
+        <dimension>
+            <dimname>logo</dimname>>
+            <tablename>spider_dim.comp_logo</tablename>>
+            <sources>
+                <source>tyc</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+
+        <dimension>
+            <dimname>base</dimname>>
+            <tablename>spider_dim.comp_base</tablename>>
+            <sources>
+                <source>tyc</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+
+        <dimension>
+            <dimname>web</dimname>>
+            <tablename>spider_dim.comp_web</tablename>>
+            <sources>
+                <source>36ke</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+
+        <dimension>
+            <dimname>intro</dimname>>
+            <tablename>spider_dim.comp_intro</tablename>>
+            <sources>
+                <source>lagou</source>>
+                <source>baidukuaizhao</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+
+        <dimension>
+            <dimname>registaddr</dimname>>
+            <tablename>spider_dim.comp_registaddr</tablename>>
+            <sources>
+                <source>tyc</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+
+        <dimension>
+            <dimname>officeaddr</dimname>>
+            <tablename>spider_dim.comp_officeaddr</tablename>>
+            <sources>
+                <source>tyc</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+
+        <dimension>
+            <dimname>shortname</dimname>>
+            <tablename>spider_dim.comp_shortname</tablename>>
+            <sources>
+                <source>lg</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <time>2017-09-15 00:00:00</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+    </read>>
+
+
+    <write>
+        <dimension>
+            <dimname>logo</dimname>>
+            <tablename>dimension_sum.comp_logo_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>base</dimname>>
+            <tablename>dimension_sum.comp_base_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>web</dimname>>
+            <tablename>dimension_sum.comp_web_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>intro</dimname>>
+            <tablename>dimension_sum.comp_intro_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>registaddr</dimname>>
+            <tablename>dimension_sum.comp_registaddr_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>officeaddr</dimname>>
+            <tablename>dimension_sum.comp_officeaddr_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>shortname</dimname>>
+            <tablename>dimension_sum.comp_shortname_sum</tablename>>
+        </dimension>>
+
+
+    </write>>
+
+
+
+
+</root>
