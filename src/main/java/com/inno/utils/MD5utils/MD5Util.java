@@ -5,6 +5,8 @@ import com.inno.bean.OnlyidBean;
 import com.inno.service.OnlyIdService;
 import com.inno.service.ServiceImpl.OnlyIdServiceImpl;
 import com.inno.utils.mybatis_factory.MybatisUtils;
+import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.spider.tycserach;
 import com.mysql.cj.core.util.StringUtils;
 
 import java.io.File;
@@ -26,12 +28,14 @@ public class MD5Util {
             '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
     protected static MessageDigest messagedigest = null;
     private static OnlyIdService onn;
+    private static RedisAction rd;
 
 
     static {
         try {
             messagedigest = MessageDigest.getInstance("MD5");
             onn=new OnlyIdServiceImpl();
+            rd=new RedisAction("10.44.51.90",6379);
         } catch (NoSuchAlgorithmException e) {
             System.out.println("MD5FileUtil messagedigest初始化失败");
         }
@@ -202,29 +206,103 @@ public class MD5Util {
         return parseMd5L16ToLong(str16);
     }
 
-    public static synchronized String[] Onlyid(String cname,String source){
-        String acname=FenciUtils.chuli(cname.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）",""));
-        OnlyidBean on= onn.select(acname);
+    public static synchronized String[] Onlyid(String cname,String source,String xiangmu) throws IOException, InterruptedException {
+        String acname=FenciUtils.chuli(cname.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）","")).replace(" ","");
+
         String onid;
         String hasid;
-        if(on==null||StringUtils.isNullOrEmpty(on.only_id)) {
-            String md5 = getMD5String(acname).substring(8, 24);
+        String md5;
+        String taid;
+        if(!StringUtils.isNullOrEmpty(xiangmu)){
+            md5 = getMD5String(acname+xiangmu).substring(8, 24);
+            taid=UnsignedLong.valueOf(md5, 16).toString();
+            onid=UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+            hasid=onid.substring(onid.length()-1);
+        }else{
+            md5 = getMD5String(acname).substring(8, 24);
             onid=UnsignedLong.valueOf(md5, 16).toString();
             hasid=onid.substring(onid.length()-1);
+            taid="";
+        }
+
+
+        boolean bo;
+        while (true) {
+            try {
+                bo = rd.get("zhuce", onid);
+                break;
+            }catch (Exception e){
+                Thread.sleep(500);
+            }
+        }
+        if(!bo) {
+            if(source.equals("tyc")){
+                Map<String,String> map=new HashMap<>();
+                map.put("be_company_name",cname);
+                map.put("af_company_name",acname);
+                map.put("only_id",onid);
+                map.put("hash_id",hasid);
+                map.put("register_or","0");
+                onn.insert(map);
+                while (true) {
+                    try {
+                        rd.set("zhuce", onid);
+                        break;
+                    }catch (Exception ee){
+                        Thread.sleep(500);
+                    }
+                }
+                return new String[]{onid,hasid,taid};
+            }else{
+                Map<String, String> map = new HashMap<>();
+                map.put("be_company_name", cname);
+                map.put("af_company_name", acname);
+                map.put("only_id", onid);
+                map.put("hash_id", hasid);
+                map.put("register_or", "1");
+                onn.insert(map);
+                return new String[]{onid,hasid,taid};
+            }/*else {
+                boolean bb = tycserach.serach(cname);
+                if (bb) {
+                    String md5 = getMD5String(acname).substring(8, 24);
+                    onid = UnsignedLong.valueOf(md5, 16).toString();
+                    hasid = onid.substring(onid.length() - 1);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("be_company_name", cname);
+                    map.put("af_company_name", acname);
+                    map.put("only_id", onid);
+                    map.put("hash_id", hasid);
+                    map.put("register_or", "0");
+                    onn.insert(map);
+                    while (true) {
+                        try {
+                            rd.set("zhuce", cname);
+                            break;
+                        }catch (Exception ee){
+                            Thread.sleep(500);
+                        }
+                    }
+                } else {
+                    String md5 = getMD5String(acname).substring(8, 24);
+                    onid = UnsignedLong.valueOf(md5, 16).toString();
+                    hasid = onid.substring(onid.length() - 1);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("be_company_name", cname);
+                    map.put("af_company_name", acname);
+                    map.put("only_id", onid);
+                    map.put("hash_id", hasid);
+                    map.put("register_or", "1");
+                    onn.insert(map);
+                }
+            }*/
+        }else{
             Map<String,String> map=new HashMap<>();
             map.put("be_company_name",cname);
             map.put("af_company_name",acname);
             map.put("only_id",onid);
             map.put("hash_id",hasid);
-            if(source.equals("tyc")){
-                map.put("register_or","0");
-            }else{
-                map.put("register_or","1");
-            }
-            onn.insert(map);
-            return new String[]{onid,hasid};
-        }else{
-            return new String[]{on.only_id,on.hash_id};
+            return new String[]{onid,hasid,taid};
         }
     }
 

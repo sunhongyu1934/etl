@@ -17,11 +17,11 @@ User类就是users表所对应的实体类
         select only_id,hash_id from dimension_sum.com_dictionaries where af_company_name=#{af_company_name}
     </select>
 
-    <select id="selectadd" parameterType="java.util.HashMap"
+    <select id="selectadd"
             resultType="java.lang.String">
         select distinct city from dimension_sum.china_province_city
     </select>
     <insert id="insertid" parameterType="java.util.HashMap">
-        insert into com_dictionaries(be_company_name,af_company_name,only_id,hash_id) values(#{be_company_name},#{af_company_name},#{only_id},#{hash_id})
+        insert into dimension_sum.com_dictionaries(be_company_name,af_company_name,only_id,hash_id,register_or) values(#{be_company_name},#{af_company_name},#{only_id},#{hash_id},#{register_or})
     </insert>
 </mapper>

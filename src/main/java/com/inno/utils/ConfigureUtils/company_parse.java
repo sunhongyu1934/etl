@@ -7,17 +7,20 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class company_parse {
     private static SAXReader sax=new SAXReader();
-    public static void main(String args[]) throws DocumentException {
+    public static void main(String args[]) throws DocumentException, FileNotFoundException {
         getAllDimensionRead();
     }
 
-    public static List<ReadTableBean> getAllDimensionRead() throws DocumentException {
-        Document doc=sax.read(company_parse.class.getClassLoader().getResourceAsStream("tablepro/table.xml"));
+    public static List<ReadTableBean> getAllDimensionRead() throws DocumentException, FileNotFoundException {
+        Document doc=sax.read(new FileInputStream("/data1/spider/etl/src/main/resources/tablepro/table.xml"));
         Element root=doc.getRootElement();
         Element read=root.element("read");
         List<Element> dims=read.elements("dimension");
@@ -43,9 +46,9 @@ public class company_parse {
         return list;
     }
 
-    public static List<WriteTableBean> getAllDimensionWrite() throws DocumentException {
+    public static List<WriteTableBean> getAllDimensionWrite() throws DocumentException, FileNotFoundException {
         SAXReader sax=new SAXReader();
-        Document doc=sax.read(company_parse.class.getClassLoader().getResourceAsStream("tablepro/table.xml"));
+        Document doc=sax.read(new FileInputStream("/data1/spider/etl/src/main/resources/tablepro/table.xml"));
         Element root=doc.getRootElement();
         Element write=root.element("write");
         List<Element> dims=write.elements("dimension");

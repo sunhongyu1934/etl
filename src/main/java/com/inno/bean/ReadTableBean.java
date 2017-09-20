@@ -10,6 +10,9 @@ public class ReadTableBean {
     private String time;
     private String loadtime;
     private String sleep;
+    private int a;
+    private String tt;
+    private String projectfield;
 
     public String getDimname() {
         return dimname;
@@ -65,5 +68,29 @@ public class ReadTableBean {
 
     public void setSleep(String sleep) {
         this.sleep = sleep;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public String getTt() {
+        return tt;
+    }
+
+    public void setTt(String tt) {
+        this.tt = tt;
+    }
+
+    public String getProjectfield() {
+        return projectfield;
+    }
+
+    public void setProjectfield(String projectfield) {
+        this.projectfield = projectfield;
     }
 }

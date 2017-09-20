@@ -13,44 +13,110 @@ User类就是users表所对应的实体类
     根据id查询得到一个user对象
  -->
     <insert id="insertlogo" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,logo_url,only_id,source) values(#{comp_full_name},#{logo_url},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,logo_url,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+                (#{item.comp_full_name},#{item.logo_url},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertbase" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,CreditCode,EconKind,LegalPerson,RegistCapi,CreateTime,BelongOrg,BusinessLife,RegistStatus,CheckDate,BusinessScope,OrgType,only_id,source)
+        insert into ${tablename}(comp_full_name,CreditCode,EconKind,LegalPerson,RegistCapi,CreateTime,BelongOrg,BusinessLife,RegistStatus,CheckDate,BusinessScope,OrgType,only_id,source_y)
 
-            values(#{comp_full_name},#{CreditCode},#{EconKind},#{LegalPerson},#{RegistCapi},#{CreateTime},#{BelongOrg},#{BusinessLife},#{RegistStatus},#{CheckDate},#{BusinessScope},#{OrgType},#{only_id},#{source})
+            values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.CreditCode},#{item.EconKind},#{item.LegalPerson},#{item.RegistCapi},#{item.CreateTime},#{item.BelongOrg},#{item.BusinessLife},#{item.RegistStatus},#{item.CheckDate},#{item.BusinessScope},#{item.OrgType},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertweb" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,web_url,only_id,source) values(#{comp_full_name},#{web_url},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,web_url,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.web_url},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertintro" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,intro,only_id,source) values(#{comp_full_name},#{intro},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,intro,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.intro},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertregistaddr" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,regaddr,only_id,source) values(#{comp_full_name},#{regaddr},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,regaddr,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.regaddr},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertofficeaddr" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,offaddr,only_id,source) values(#{comp_full_name},#{offaddr},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,offaddr,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.offaddr},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertshortname" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,english_short,chinese_short,only_id,source) values(#{comp_full_name},#{english_short},#{chinese_short},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,english_short,chinese_short,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.english_short},#{item.chinese_short},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertcontactinfo" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,phone,email,fax,linkman,only_id,source) values(#{comp_full_name},#{phone},#{email},#{fax},#{linkman},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,phone,email,fax,linkman,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.phone},#{item.email},#{item.fax},#{item.linkman},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
     <insert id="insertteaminfo" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,staffName,staffPosition,staffIntro,onPositionStatus,headPic,staffPhone,staffEmail) values(#{comp_full_name},#{staffName},#{staffPosition},#{staffIntro},#{onPositionStatus},#{headPic},#{staffPhone},#{staffEmail},#{only_id},#{source})
+        insert into ${tablename}(comp_full_name,staffName,staffPosition,staffIntro,onPositionStatus,headPic,staffPhone,staffEmail,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.comp_full_name},#{item.staffName},#{item.staffPosition},#{item.staffIntro},#{item.onPositionStatus},#{item.headPic},#{item.staffPhone},#{item.staffEmail},#{item.only_id},#{item.source})
+        </foreach>
     </insert>
 
-    <delete id="delete" parameterType="java.util.HashMap">
-        delete from ${tablename} where only_id=#{only_id} and source=#{source}
+    
+    <insert id="insertjigou" parameterType="java.util.HashMap">
+        insert into ${tablename}(company_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,`describe`,filing_time,p_id,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+        (#{item.company_full_name},#{item.s_id},#{item.logo},#{item.company_abbreviation},#{item.company_eng_abbreviation},#{item.web},#{item.establishment_time},#{item.capital_type},#{item.organization_form},#{item.VC},#{item.managed_capital},#{item.registered_area},#{item.corporate_headquarters},#{item.keep_on_record},#{item.registration_number},#{item.describe},#{item.filing_time},#{item.p_id},#{item.only_id},#{item.source})
+        </foreach>
+    </insert>
+
+    <insert id="insertapp" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,app_pic,app_pack_name,app_name,is_gov,down_num,score,`size`,version,pictures,description,category,tags,update_time,good_comm_rate,comm_num,good_comm_num,mid_comm_num,bad_comm_num,same_develop,also_likes,only_id,tail_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.app_pic},#{item.app_pack_name},#{item.app_name},#{item.is_gov},#{item.down_num},#{item.score},#{item.size},#{item.version},#{item.pictures},#{item.description},#{category},#{item.tags},#{item.update_time},#{item.good_comm_rate},#{item.comm_num},#{item.good_comm_num},#{item.mid_comm_num},#{item.bad_comm_num},#{item.same_develop},#{item.also_likes},#{item.only_id},#{item.taid},#{item.source})
+        </foreach>
+    </insert>
+
+    <insert id="insertpublic" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,public_name,logo,weixin_num,feature,url_detail,crawlTime,only_id,tail_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.public_name},#{item.logo},#{item.weixin_num},#{item.feature},#{item.url_detail},#{item.crawlTime},#{item.only_id},#{item.taid},#{item.source})
+        </foreach>
+    </insert>
+
+    <insert id="insertproduct" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,sName,web_url,juzi_score,company_slogan,company_industry,sub_industry,company_address,company_logo,company_tags,product_logos,company_introduction,intro,found_time,company_scale,company_status,mongo_id,source_url,similar,only_id,tail_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.sName},#{item.web_url},#{item.juzi_score},#{item.company_slogan},#{item.company_industry},#{item.sub_industry},#{item.company_address},#{item.company_logo},#{item.company_tags],#{item.product_logos},#{item.company_introduction},#{item.intro},#{item.found_time},#{item.company_scale},#{item.company_status},#{item.mongo_id},#{item.source_url},#{item.similar},#{item.only_id},#{item.taid},#{item.source})
+        </foreach>
+    </insert>
+
+   <delete id="delete" parameterType="java.util.HashMap">
+        delete from ${tablename} where source_y=#{source} and only_id in
+        <foreach collection="field" index="index" open="(" close=")" item="item" separator ="," >
+        #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteproject" parameterType="java.util.HashMap">
+        delete from ${tablename} where source_y=#{source} and tail_id in
+        <foreach collection="field" index="index" open="(" close=")" item="item" separator ="," >
+            #{item}
+        </foreach>
     </delete>
 </mapper>

@@ -7,6 +7,7 @@ import com.hankcs.hanlp.seg.common.Term;
 import com.inno.utils.mybatis_factory.MybatisUtils;
 
 import java.io.StringReader;
+import java.util.Date;
 import java.util.List;
 
 public class FenciUtils {

@@ -4,6 +4,8 @@ import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.apache.ibatis.datasource.DataSourceFactory;
 
 import javax.sql.DataSource;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -19,7 +21,12 @@ public class dbcpDatasourceFactory implements DataSourceFactory{
 
     @Override
     public DataSource getDataSource() {
-        InputStream in = dbcpDatasourceFactory.class.getClassLoader().getResourceAsStream("dbcppro/dbcpconfig.properties");
+        InputStream in = null;
+        try {
+            in = new FileInputStream("/data1/spider/etl/src/main/resources/dbcppro/dbcpconfig.properties");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         Properties prop = new Properties();
         try {
             prop.load(in);

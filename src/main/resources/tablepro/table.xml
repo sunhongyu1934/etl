@@ -8,7 +8,8 @@
                 <source>tyc</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -20,7 +21,8 @@
                 <source>tyc</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -32,7 +34,8 @@
                 <source>36ke</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -41,11 +44,12 @@
             <dimname>intro</dimname>>
             <tablename>spider_dim.comp_intro</tablename>>
             <sources>
-                <source>lagou</source>>
+                <source>lg</source>>
                 <source>baidukuaizhao</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -57,7 +61,8 @@
                 <source>tyc</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -69,7 +74,8 @@
                 <source>tyc</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -81,7 +87,8 @@
                 <source>lg</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <time>2017-09-15 00:00:00</time>>
+            <projectfield></projectfield>>
+            <time>1</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
