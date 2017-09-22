@@ -2,6 +2,7 @@ package com.inno.dao.Impl;
 
 import com.inno.bean.WriteTableBean;
 import com.inno.dao.WriteDao;
+import com.inno.utils.Dup;
 import com.inno.utils.mybatis_factory.MybatisUtils;
 import com.mysql.cj.core.util.StringUtils;
 
@@ -12,10 +13,11 @@ public class WriteDaoImpl implements WriteDao{
     public void insertList(List<Map<String, Object>> list, WriteTableBean w) {
         String ns="mapping.WriteMapper.insert"+w.getDimname();
 
+        List<Map<String,Object>> lists= Dup.quchong(list,"only_id");
         for(int x=0;x<=9;x++) {
             List<Map<String, Object>> ll = new ArrayList<>();
             Map<String,Object> mmp=new HashMap<>();
-            for (Map<String, Object> mm : list) {
+            for (Map<String, Object> mm : lists) {
                 String hid = (String) mm.get("hasid");
                 if (Integer.parseInt(hid) == x) {
                     ll.add(mm);
@@ -23,7 +25,9 @@ public class WriteDaoImpl implements WriteDao{
             }
             mmp.put("tablename", w.getTablename() + x);
             mmp.put("field",ll);
-            MybatisUtils.getInstance().insert(ns,mmp);
+            if(ll!=null&&ll.size()>0) {
+                MybatisUtils.getInstance().insert(ns, mmp);
+            }
         }
     }
 
@@ -48,7 +52,7 @@ public class WriteDaoImpl implements WriteDao{
                 for(Map<String,Object> mm:list){
                     String hid = (String) mm.get("hasid");
                     if (Integer.parseInt(hid) == x&&s.equals(mm.get("source"))) {
-                        if(StringUtils.isNullOrEmpty((String) mm.get("taid"))){
+                        if(!Dup.nullor(String.valueOf(mm.get("taid")))){
                             ll.add((String) mm.get("only_id"));
                         }else{
                             ns="mapping.WriteMapper.deleteproject";
@@ -60,7 +64,9 @@ public class WriteDaoImpl implements WriteDao{
                 mmp.put("tablename", w.getTablename() + x);
                 mmp.put("source",s);
                 mmp.put("field",ll);
-                MybatisUtils.getInstance().delete(ns,mmp);
+                if(ll!=null&&ll.size()>0) {
+                    MybatisUtils.getInstance().delete(ns, mmp);
+                }
             }
         }
 

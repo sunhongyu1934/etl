@@ -7,7 +7,9 @@ import com.inno.service.ServiceImpl.ReadServiceImpl;
 import com.inno.service.ServiceImpl.WriteServiceImpl;
 import com.inno.service.WriteService;
 import com.inno.utils.ConfigureUtils.company_parse;
+import com.inno.utils.Dup;
 import com.inno.utils.MD5utils.MD5Util;
+import com.mysql.cj.core.util.StringUtils;
 import org.dom4j.DocumentException;
 
 import java.io.FileNotFoundException;
@@ -96,13 +98,15 @@ public class Rw {
                 if (r.getDimname().equals(w.getDimname())) {
                     for (Map<String, Object> map : list) {
                         try {
-                            map.put("source", source);
-                            String[] ids = MD5Util.Onlyid((String) map.get(r.getCompanyfield()), source,(String) map.get(r.getProjectfield()));
-                            map.put("only_id", ids[0]);
-                            map.put("hasid", ids[1]);
-                            map.put("taid",ids[2]);
-                            a++;
-                            ll.add(map);
+                            if(map.get(r.getCompanyfield())!=null&&Dup.nullor(String.valueOf(map.get(r.getCompanyfield())))){
+                                map.put("source", source);
+                                String[] ids = MD5Util.Onlyid((String) map.get(r.getCompanyfield()), source, (String) map.get(r.getProjectfield()));
+                                map.put("only_id", ids[0]);
+                                map.put("hasid", ids[1]);
+                                map.put("taid", ids[2]);
+                                a++;
+                                ll.add(map);
+                            }
                             if(a%20000==0){
                                 wr.delete(ll,w);
                                 wr.insert(ll, w);

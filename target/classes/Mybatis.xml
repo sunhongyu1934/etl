@@ -19,6 +19,7 @@
         <mapper resource="mapping/ReadMapper.xml"/>
         <mapper resource="mapping/WriteMapper.xml"/>
         <mapper resource="mapping/OnlyidMapper.xml"/>
+        <mapper resource="mapping/JigouMapper.xml"/>
 
     </mappers>
 </configuration>

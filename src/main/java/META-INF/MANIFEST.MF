@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: test.panduan
+Main-Class: com.inno.controller.JgController.JG
 

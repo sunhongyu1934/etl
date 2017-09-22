@@ -79,9 +79,9 @@ User类就是users表所对应的实体类
 
     
     <insert id="insertjigou" parameterType="java.util.HashMap">
-        insert into ${tablename}(company_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,`describe`,filing_time,p_id,only_id,source_y) values
+        insert into ${tablename}(comp_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,`describe`,filing_time,p_id,only_id,source_y) values
         <foreach collection="field" index="index" item="item" separator ="," >
-        (#{item.company_full_name},#{item.s_id},#{item.logo},#{item.company_abbreviation},#{item.company_eng_abbreviation},#{item.web},#{item.establishment_time},#{item.capital_type},#{item.organization_form},#{item.VC},#{item.managed_capital},#{item.registered_area},#{item.corporate_headquarters},#{item.keep_on_record},#{item.registration_number},#{item.describe},#{item.filing_time},#{item.p_id},#{item.only_id},#{item.source})
+        (#{item.comp_full_name},#{item.s_id},#{item.logo},#{item.company_abbreviation},#{item.company_eng_abbreviation},#{item.web},#{item.establishment_time},#{item.capital_type},#{item.organization_form},#{item.VC},#{item.managed_capital},#{item.registered_area},#{item.corporate_headquarters},#{item.keep_on_record},#{item.registration_number},#{item.describe},#{item.filing_time},#{item.p_id},#{item.only_id},#{item.source})
         </foreach>
     </insert>
 
@@ -102,7 +102,7 @@ User类就是users表所对应的实体类
     <insert id="insertproduct" parameterType="java.util.HashMap">
         insert into ${tablename}(comp_full_name,sName,web_url,juzi_score,company_slogan,company_industry,sub_industry,company_address,company_logo,company_tags,product_logos,company_introduction,intro,found_time,company_scale,company_status,mongo_id,source_url,similar,only_id,tail_id,source_y) values
         <foreach collection="field" index="index" item="item" separator ="," >
-            (#{item.comp_full_name},#{item.sName},#{item.web_url},#{item.juzi_score},#{item.company_slogan},#{item.company_industry},#{item.sub_industry},#{item.company_address},#{item.company_logo},#{item.company_tags],#{item.product_logos},#{item.company_introduction},#{item.intro},#{item.found_time},#{item.company_scale},#{item.company_status},#{item.mongo_id},#{item.source_url},#{item.similar},#{item.only_id},#{item.taid},#{item.source})
+            (#{item.comp_full_name},#{item.sName},#{item.web_url},#{item.juzi_score},#{item.company_slogan},#{item.company_industry},#{item.sub_industry},#{item.company_address},#{item.company_logo},#{item.company_tags},#{item.product_logos},#{item.company_introduction},#{item.intro},#{item.found_time},#{item.company_scale},#{item.company_status},#{item.mongo_id},#{item.source_url},#{item.similar},#{item.only_id},#{item.taid},#{item.source})
         </foreach>
     </insert>
 

@@ -14,13 +14,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class company_parse {
-    private static SAXReader sax=new SAXReader();
     public static void main(String args[]) throws DocumentException, FileNotFoundException {
         getAllDimensionRead();
     }
 
     public static List<ReadTableBean> getAllDimensionRead() throws DocumentException, FileNotFoundException {
-        Document doc=sax.read(new FileInputStream("/data1/spider/etl/src/main/resources/tablepro/table.xml"));
+        SAXReader sax=new SAXReader();
+        String linpath="/data1/spider/etl/src/main/resources/tablepro/table.xml";
+        String winpath="D:\\工作\\代码\\etl\\src/main/resources/tablepro/table.xml";
+        String path;
+        String os=System.getProperty("os.name");
+        if(os.contains("Windows")){
+            path=winpath;
+        }else{
+            path=linpath;
+        }
+        Document doc=sax.read(new FileInputStream(path));
         Element root=doc.getRootElement();
         Element read=root.element("read");
         List<Element> dims=read.elements("dimension");
@@ -41,6 +50,7 @@ public class company_parse {
             redt.setTime(ele.element("time").getText());
             redt.setLoadtime(ele.element("loadtime").getText());
             redt.setSleep(ele.element("sleep").getText());
+            redt.setProjectfield(ele.element("projectfield").getText());
             list.add(redt);
         }
         return list;
@@ -48,7 +58,16 @@ public class company_parse {
 
     public static List<WriteTableBean> getAllDimensionWrite() throws DocumentException, FileNotFoundException {
         SAXReader sax=new SAXReader();
-        Document doc=sax.read(new FileInputStream("/data1/spider/etl/src/main/resources/tablepro/table.xml"));
+        String linpath="/data1/spider/etl/src/main/resources/tablepro/table.xml";
+        String winpath="D:\\工作\\代码\\etl\\src/main/resources/tablepro/table.xml";
+        String path;
+        String os=System.getProperty("os.name");
+        if(os.contains("Windows")){
+            path=winpath;
+        }else{
+            path=linpath;
+        }
+        Document doc=sax.read(new FileInputStream(path));
         Element root=doc.getRootElement();
         Element write=root.element("write");
         List<Element> dims=write.elements("dimension");

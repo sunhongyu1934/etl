@@ -1,15 +1,20 @@
 <root>
 
     <read>
-        <dimension>
+      <!--  <dimension>
             <dimname>logo</dimname>>
             <tablename>spider_dim.comp_logo</tablename>>
             <sources>
                 <source>tyc</source>>
+                <source>it</source>>
+                <source>itleida</source>>
+                <source>qcc</source>>
+                <source>cyb</source>>
+                <source>xixiu</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -19,10 +24,13 @@
             <tablename>spider_dim.comp_base</tablename>>
             <sources>
                 <source>tyc</source>>
+                <source>smt</source>>
+                <source>qcc</source>>
+                <source>cyb</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -32,10 +40,16 @@
             <tablename>spider_dim.comp_web</tablename>>
             <sources>
                 <source>36ke</source>>
+                <source>cyb</source>>
+                <source>itleida</source>>
+                <source>lg</source>>
+                <source>tyc</source>>
+                <source>xixiu</source>>
+                <source>zy</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -46,10 +60,17 @@
             <sources>
                 <source>lg</source>>
                 <source>baidukuaizhao</source>>
+                <source>baidubaike</source>>
+                <source>cyb</source>>
+                <source>it</source>>
+                <source>zy</source>>
+                <source>smt</source>>
+                <source>tyc</source>>
+                <source>xixiu</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -59,10 +80,12 @@
             <tablename>spider_dim.comp_registaddr</tablename>>
             <sources>
                 <source>tyc</source>>
+                <source>smt</source>>
+                <source>cyb</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -72,10 +95,11 @@
             <tablename>spider_dim.comp_officeaddr</tablename>>
             <sources>
                 <source>tyc</source>>
+                <source>zy</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -85,13 +109,92 @@
             <tablename>spider_dim.comp_shortname</tablename>>
             <sources>
                 <source>lg</source>>
+                <source>cyb</source>>
+                <source>itleida</source>>
+                <source>smt</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-            <projectfield></projectfield>>
-            <time>1</time>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
+        <dimension>
+            <dimname>contactinfo</dimname>>
+            <tablename>spider_dim.comp_contactinfo</tablename>>
+            <sources>
+                <source>tyc</source>>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>
+        <dimension>
+            <dimname>teaminfo</dimname>>
+            <tablename>spider_dim.comp_teaminfo</tablename>>
+            <sources>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  -->
+        <dimension>
+            <dimname>jigou</dimname>>
+            <tablename>spider_dim.jigou_base</tablename>>
+            <sources>
+	     <source>smt</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+	    <projectfield></projectfield>
+            <time>2592000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  
+
+      <!-- 
+        <dimension>
+            <dimname>app</dimname>>
+            <tablename>spider_dim.item_app</tablename>>
+            <sources>
+	     <source>yingyongbao</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+	    <projectfield>app_name</projectfield>
+            <time>2592000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>         
+                                   
+         <dimension>
+            <dimname>public</dimname>>
+            <tablename>spider_dim.item_public</tablename>>
+            <sources>
+	     <source>weixin</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+	    <projectfield>public_name</projectfield>
+            <time>2592000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>> 
+
+        <dimension>
+            <dimname>product</dimname>>
+            <tablename>spider_dim.item_product</tablename>>
+            <sources>
+	     <source>it</source>
+	     <source>36ke</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+	    <projectfield>sName</projectfield>
+            <time>2592000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>> -->
     </read>>
 
 
@@ -99,6 +202,11 @@
         <dimension>
             <dimname>logo</dimname>>
             <tablename>dimension_sum.comp_logo_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>jigou</dimname>>
+            <tablename>dimension_sum.jigou_base_sum</tablename>>
         </dimension>>
 
         <dimension>
@@ -131,7 +239,26 @@
             <tablename>dimension_sum.comp_shortname_sum</tablename>>
         </dimension>>
 
-
+        <dimension>
+            <dimname>contactinfo</dimname>>
+            <tablename>dimension_sum.comp_contactinfo_sum</tablename>>
+        </dimension>>
+        <dimension>
+            <dimname>teaminfo</dimname>>
+            <tablename>dimension_sum.comp_teaminfo_sum</tablename>>
+        </dimension>>
+        <dimension>
+            <dimname>app</dimname>>
+            <tablename>dimension_sum.item_app_sum</tablename>>
+        </dimension>>
+        <dimension>
+            <dimname>public</dimname>>
+            <tablename>dimension_sum.item_public_sum</tablename>>
+        </dimension>>
+        <dimension>
+            <dimname>product</dimname>>
+            <tablename>dimension_sum.item_product_sum</tablename>>
+        </dimension>>
     </write>>
 
 

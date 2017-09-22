@@ -79,9 +79,9 @@ User类就是users表所对应的实体类
 
     
     <insert id="insertjigou" parameterType="java.util.HashMap">
-        insert into ${tablename}(company_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,`describe`,filing_time,p_id,only_id,source_y) values
+        insert into ${tablename}(comp_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,`describe`,filing_time,p_id,only_id,source_y) values
         <foreach collection="field" index="index" item="item" separator ="," >
-        (#{item.company_full_name},#{item.s_id},#{item.logo},#{item.company_abbreviation},#{item.company_eng_abbreviation},#{item.web},#{item.establishment_time},#{item.capital_type},#{item.organization_form},#{item.VC},#{item.managed_capital},#{item.registered_area},#{item.corporate_headquarters},#{item.keep_on_record},#{item.registration_number},#{item.describe},#{item.filing_time},#{item.p_id},#{item.only_id},#{item.source})
+        (#{item.comp_full_name},#{item.s_id},#{item.logo},#{item.company_abbreviation},#{item.company_eng_abbreviation},#{item.web},#{item.establishment_time},#{item.capital_type},#{item.organization_form},#{item.VC},#{item.managed_capital},#{item.registered_area},#{item.corporate_headquarters},#{item.keep_on_record},#{item.registration_number},#{item.describe},#{item.filing_time},#{item.p_id},#{item.only_id},#{item.source})
         </foreach>
     </insert>
 
@@ -102,9 +102,27 @@ User类就是users表所对应的实体类
     <insert id="insertproduct" parameterType="java.util.HashMap">
         insert into ${tablename}(comp_full_name,sName,web_url,juzi_score,company_slogan,company_industry,sub_industry,company_address,company_logo,company_tags,product_logos,company_introduction,intro,found_time,company_scale,company_status,mongo_id,source_url,similar,only_id,tail_id,source_y) values
         <foreach collection="field" index="index" item="item" separator ="," >
-            (#{item.comp_full_name},#{item.sName},#{item.web_url},#{item.juzi_score},#{item.company_slogan},#{item.company_industry},#{item.sub_industry},#{item.company_address},#{item.company_logo},#{item.company_tags],#{item.product_logos},#{item.company_introduction},#{item.intro},#{item.found_time},#{item.company_scale},#{item.company_status},#{item.mongo_id},#{item.source_url},#{item.similar},#{item.only_id},#{item.taid},#{item.source})
+            (#{item.comp_full_name},#{item.sName},#{item.web_url},#{item.juzi_score},#{item.company_slogan},#{item.company_industry},#{item.sub_industry},#{item.company_address},#{item.company_logo},#{item.company_tags},#{item.product_logos},#{item.company_introduction},#{item.intro},#{item.found_time},#{item.company_scale},#{item.company_status},#{item.mongo_id},#{item.source_url},#{item.similar},#{item.only_id},#{item.taid},#{item.source})
         </foreach>
     </insert>
+
+    <insert id="insertfund_base" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,s_id,g_id,zhong_jian,ying_jian,guanli_jigou,zhengfu_flag,chengli_time,zong_bu,ziben_type,zuzhi_xingshi,jijin_type,muji_statue,bei_an,shenbao_statue,de_sc,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.s_id},#{item.g_id},#{item.zhong_jian},#{item.ying_jian},#{item.guanli_jigou},#{item.zhengfu_flag},#{item.chengli_time},#{item.zong_bu},#{item.ziben_type},#{item.zuzhi_xingshi},#{item.jijin_type},#{item.muji_statue},#{item.bei_an},#{item.shenbao_statue},#{item.de_sc},#{item.only_id},#{item.source})
+        </foreach>
+    </insert>
+
+    <insert id="insertfund_base1" parameterType="java.util.HashMap">
+        insert into ${tablename}(fundName,fundId,fundNo,establishDate,putOnRecordDate,putOnRecordState,fundType,moneyType,managerName,managerId,managerType,mandatorName,investField,workingState,fundUpdate,suggestion,monthly,halfYearly,yearly,quarterly,crawlTime,only_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.fundName},#{item.fundId},#{item.fundNo},#{item.establishDate},#{item.putOnRecordDate},#{item.putOnRecordState},#{item.fundType},#{item.moneyType},#{item.managerName},#{item.managerId},#{item.managerType},#{item.mandatorName},#{item.investField},#{item.workingState},#{item.fundUpdate},#{item.suggestion},#{item.monthly},#{item.halfYearly},#{item.yearly},#{item.quarterly},#{item.crawlTime},#{item.only_id},#{item.source})
+        </foreach>
+    </insert>
+
+
+
+
 
    <delete id="delete" parameterType="java.util.HashMap">
         delete from ${tablename} where source_y=#{source} and only_id in

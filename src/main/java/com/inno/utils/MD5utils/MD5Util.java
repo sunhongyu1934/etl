@@ -4,6 +4,7 @@ import com.google.common.primitives.UnsignedLong;
 import com.inno.bean.OnlyidBean;
 import com.inno.service.OnlyIdService;
 import com.inno.service.ServiceImpl.OnlyIdServiceImpl;
+import com.inno.utils.Dup;
 import com.inno.utils.mybatis_factory.MybatisUtils;
 import com.inno.utils.redisUtils.RedisAction;
 import com.inno.utils.spider.tycserach;
@@ -207,13 +208,12 @@ public class MD5Util {
     }
 
     public static synchronized String[] Onlyid(String cname,String source,String xiangmu) throws IOException, InterruptedException {
-        String acname=FenciUtils.chuli(cname.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）","")).replace(" ","");
-
+        String acname=FenciUtils.chuli(cname.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）","").replace(" ","").replaceAll("\\s","").replace(" ","").trim());
         String onid;
         String hasid;
         String md5;
         String taid;
-        if(!StringUtils.isNullOrEmpty(xiangmu)){
+        if(Dup.nullor(xiangmu)){
             md5 = getMD5String(acname+xiangmu).substring(8, 24);
             taid=UnsignedLong.valueOf(md5, 16).toString();
             onid=UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();

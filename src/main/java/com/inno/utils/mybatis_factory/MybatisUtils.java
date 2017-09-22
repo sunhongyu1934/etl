@@ -15,7 +15,16 @@ public class MybatisUtils {
 
         static{
             try {
-                in=new FileInputStream("/data1/spider/etl/src/main/resources/Mybatis.xml");
+                String linpath="/data1/spider/etl/src/main/resources/Mybatis.xml";
+                String winpath="D:\\工作\\代码\\etl\\src/main/resources/Mybatis.xml";
+                String path;
+                String os=System.getProperty("os.name");
+                if(os.contains("Windows")){
+                    path=winpath;
+                }else{
+                    path=linpath;
+                }
+                in=new FileInputStream(path);
                 session= new SqlSessionFactoryBuilder().build(in).openSession(true);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
