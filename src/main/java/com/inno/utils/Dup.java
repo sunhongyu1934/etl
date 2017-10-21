@@ -3,6 +3,8 @@ package com.inno.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Dup {
 
@@ -27,6 +29,20 @@ public class Dup {
             return true;
         }else {
             return false;
+        }
+    }
+
+    public static String renull(String key){
+        if(Dup.nullor(key)) {
+            Pattern p = Pattern.compile("[a-zA-z]");
+            Matcher m = p.matcher(key);
+            if(m.find()){
+                return key.trim();
+            }else{
+                return key.replaceAll("\\s", "").replace(" ", "").trim();
+            }
+        }else{
+            return null;
         }
     }
 }

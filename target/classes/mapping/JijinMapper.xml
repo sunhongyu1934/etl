@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+-->
+<mapper namespace="mapping.JijinMapper">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+ resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+User类就是users表所对应的实体类
+-->
+    <!--
+    根据id查询得到一个user对象
+ -->
+    <select id="getRead" parameterType="java.util.HashMap"
+            resultType="java.util.HashMap">
+        select * from dimension_sum.${tablename}
+    </select>
+
+
+    <delete id="delete" parameterType="java.util.HashMap">
+        delete from clean_data.fund_base_info where fund_id in
+        <foreach collection="field" index="index" open="(" close=")" item="item" separator ="," >
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <insert id="insert" parameterType="java.util.HashMap">
+        insert into clean_data.fund_base_info(fund_id,fund_name,fund_shortname,fund_englishname,comp_id,comp_full_name,fund_type,collect_status,captital_type,finish_date,invest_num,organ_type,is_gov_trust,create_date,keep_on_record,record_date,report_status,run_status,fund_intro,fund_amount,fund_money,fund_cur,head_quarter,trust_org_name,manage_type,last_up_date,data_source,del_flag) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.fund_id},#{item.fund_name},#{item.fund_shortname},#{item.fund_englishname},#{item.comp_id},#{item.comp_full_name},#{item.fund_type},#{item.collect_status},#{item.captital_type},#{item.finish_date},#{item.invest_num},#{item.organ_type},#{item.is_gov_trust},#{item.create_date},#{item.keep_on_record},#{item.record_date},#{item.report_status},#{item.run_status},#{item.fund_intro},#{item.fund_amount},#{item.fund_money},#{item.fund_cur},#{item.head_quarter},#{item.trust_org_name},#{item.manage_type},#{item.last_up_date},#{item.data_source},#{item.del_flag})
+        </foreach>
+    </insert>
+</mapper>

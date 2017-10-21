@@ -4,7 +4,6 @@ import com.inno.bean.WriteTableBean;
 import com.inno.dao.WriteDao;
 import com.inno.utils.Dup;
 import com.inno.utils.mybatis_factory.MybatisUtils;
-import com.mysql.cj.core.util.StringUtils;
 
 import java.util.*;
 
@@ -12,8 +11,12 @@ public class WriteDaoImpl implements WriteDao{
     @Override
     public void insertList(List<Map<String, Object>> list, WriteTableBean w) {
         String ns="mapping.WriteMapper.insert"+w.getDimname();
-
-        List<Map<String,Object>> lists= Dup.quchong(list,"only_id");
+        List<Map<String,Object>> lists;
+        if(Dup.nullor((String) list.get(0).get("taid"))){
+            lists = Dup.quchong(list, "taid");
+        }else {
+            lists = Dup.quchong(list, "only_id");
+        }
         for(int x=0;x<=9;x++) {
             List<Map<String, Object>> ll = new ArrayList<>();
             Map<String,Object> mmp=new HashMap<>();
@@ -52,7 +55,7 @@ public class WriteDaoImpl implements WriteDao{
                 for(Map<String,Object> mm:list){
                     String hid = (String) mm.get("hasid");
                     if (Integer.parseInt(hid) == x&&s.equals(mm.get("source"))) {
-                        if(!Dup.nullor(String.valueOf(mm.get("taid")))){
+                        if(!Dup.nullor((String) mm.get("taid"))){
                             ll.add((String) mm.get("only_id"));
                         }else{
                             ns="mapping.WriteMapper.deleteproject";

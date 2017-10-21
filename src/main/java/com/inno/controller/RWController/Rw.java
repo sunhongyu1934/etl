@@ -9,7 +9,6 @@ import com.inno.service.WriteService;
 import com.inno.utils.ConfigureUtils.company_parse;
 import com.inno.utils.Dup;
 import com.inno.utils.MD5utils.MD5Util;
-import com.mysql.cj.core.util.StringUtils;
 import org.dom4j.DocumentException;
 
 import java.io.FileNotFoundException;
@@ -99,8 +98,14 @@ public class Rw {
                     for (Map<String, Object> map : list) {
                         try {
                             if(map.get(r.getCompanyfield())!=null&&Dup.nullor(String.valueOf(map.get(r.getCompanyfield())))){
+                                List<String> lp=new ArrayList<>();
+                                for(String ss:r.getProjectfield()){
+                                    if(Dup.nullor((String) map.get(ss))) {
+                                        lp.add((String) map.get(ss));
+                                    }
+                                }
                                 map.put("source", source);
-                                String[] ids = MD5Util.Onlyid((String) map.get(r.getCompanyfield()), source, (String) map.get(r.getProjectfield()));
+                                String[] ids = MD5Util.Onlyid((String) map.get(r.getCompanyfield()), source, lp);
                                 map.put("only_id", ids[0]);
                                 map.put("hasid", ids[1]);
                                 map.put("taid", ids[2]);

@@ -1,0 +1,62 @@
+<root>
+
+    <read>
+      <!--  <dimension>
+            <dimname>fund_base</dimname>>
+            <tablename>clean_data.fund_base_info</tablename>>
+            <time>1728000</time>>
+            <loadtime>modify_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  
+        <dimension>
+            <dimname>jigou</dimname>>
+            <tablename>clean_data.institution_base_info</tablename>>
+            <time>17280000</time>>
+            <loadtime>modify_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  
+        <dimension>
+            <dimname>fund_exit</dimname>>
+            <tablename>clean_data.institution_exit_info</tablename>>
+            <time>17280000</time>>
+            <loadtime>modify_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  -->
+        <dimension>
+            <dimname>gudong</dimname>>
+            <tablename>clean_data.company_shareholder</tablename>>
+            <time>172800000</time>>
+            <loadtime>modify_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  
+    </read>>
+
+
+
+
+
+    <write>
+        <dimension>
+            <dimname>fund_base</dimname>>
+            <tablename>innotree_data.fund_base_info</tablename>>
+	    <onid>fund_id</onid>>
+        </dimension>>
+        <dimension>
+            <dimname>jigou</dimname>>
+            <tablename>innotree_data.institution_base_info</tablename>>
+	    <onid>comp_id</onid>>
+        </dimension>>
+        <dimension>
+            <dimname>fund_exit</dimname>>
+            <tablename>innotree_data.institution_exit_info</tablename>>
+	    <onid>tail_id</onid>>
+        </dimension>>
+        <dimension>
+            <dimname>gudong</dimname>>
+            <tablename>innotree_data.company_shareholder</tablename>>
+	    <onid>tail_id</onid>>
+        </dimension>>
+    </write>>
+
+
+</root>

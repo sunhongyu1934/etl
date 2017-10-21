@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+-->
+<mapper namespace="mapping.TuichuMapper">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+ resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+User类就是users表所对应的实体类
+-->
+    <!--
+    根据id查询得到一个user对象
+ -->
+    <select id="getRead" parameterType="java.util.HashMap"
+            resultType="java.util.HashMap">
+        select * from dimension_sum.${tablename}
+    </select>
+
+
+    <delete id="delete" parameterType="java.util.HashMap">
+        delete from clean_data.institution_exit_info where tail_id in
+        <foreach collection="field" index="index" open="(" close=")" item="item" separator ="," >
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <insert id="insert" parameterType="java.util.HashMap">
+        insert into clean_data.institution_exit_info(comp_id,tail_id,comp_full_name,exit_date,exit_comp_id,exit_full_name,exit_name_short,exit_way,return_amount,return_multiple,sum_invest_amount,first_invest_date,data_source,del_flag) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_id},#{item.tail_id},#{item.comp_full_name},#{item.exit_date},#{item.exit_comp_id},#{item.exit_full_name},#{item.exit_name_short},#{item.exit_way},#{item.return_amount},#{item.return_multiple},#{item.sum_invest_amount},#{item.first_invest_date},#{item.data_source},#{item.del_flag})
+        </foreach>
+    </insert>
+</mapper>

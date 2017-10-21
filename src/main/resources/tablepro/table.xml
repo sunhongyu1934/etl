@@ -1,20 +1,17 @@
 <root>
 
     <read>
-      <!--  <dimension>
+    <!--    <dimension>
             <dimname>logo</dimname>>
             <tablename>spider_dim.comp_logo</tablename>>
             <sources>
                 <source>tyc</source>>
-                <source>it</source>>
-                <source>itleida</source>>
-                <source>qcc</source>>
-                <source>cyb</source>>
-                <source>xixiu</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+            <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -24,13 +21,12 @@
             <tablename>spider_dim.comp_base</tablename>>
             <sources>
                 <source>tyc</source>>
-                <source>smt</source>>
-                <source>qcc</source>>
-                <source>cyb</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -39,17 +35,13 @@
             <dimname>web</dimname>>
             <tablename>spider_dim.comp_web</tablename>>
             <sources>
-                <source>36ke</source>>
-                <source>cyb</source>>
-                <source>itleida</source>>
-                <source>lg</source>>
                 <source>tyc</source>>
-                <source>xixiu</source>>
-                <source>zy</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -58,48 +50,43 @@
             <dimname>intro</dimname>>
             <tablename>spider_dim.comp_intro</tablename>>
             <sources>
-                <source>lg</source>>
-                <source>baidukuaizhao</source>>
-                <source>baidubaike</source>>
-                <source>cyb</source>>
-                <source>it</source>>
-                <source>zy</source>>
-                <source>smt</source>>
                 <source>tyc</source>>
-                <source>xixiu</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
-        </dimension>>
+        </dimension>>  -->
 
         <dimension>
             <dimname>registaddr</dimname>>
             <tablename>spider_dim.comp_registaddr</tablename>>
             <sources>
                 <source>tyc</source>>
-                <source>smt</source>>
-                <source>cyb</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
 
-        <dimension>
+    <!--    <dimension>
             <dimname>officeaddr</dimname>>
             <tablename>spider_dim.comp_officeaddr</tablename>>
             <sources>
                 <source>tyc</source>>
-                <source>zy</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>
@@ -114,11 +101,13 @@
                 <source>smt</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	   <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>172800</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
-        </dimension>>
+        </dimension>>   
         <dimension>
             <dimname>contactinfo</dimname>>
             <tablename>spider_dim.comp_contactinfo</tablename>>
@@ -126,22 +115,13 @@
                 <source>tyc</source>>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>864000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
-        </dimension>>
-        <dimension>
-            <dimname>teaminfo</dimname>>
-            <tablename>spider_dim.comp_teaminfo</tablename>>
-            <sources>
-            </sources>>
-            <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
-            <loadtime>load_time</loadtime>>
-            <sleep>10</sleep>>
-        </dimension>>
+        </dimension>>  
         <dimension>
             <dimname>jigou</dimname>>
             <tablename>spider_dim.jigou_base</tablename>>
@@ -149,21 +129,25 @@
 	     <source>smt</source>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield></projectfield>
-            <time>2592000</time>>
+	    <projectfields>
+            <projectfield></projectfield>
+            </projectfields>
+            <time>25920000000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
         </dimension>>  -->
 
-      <!-- 
-        <dimension>
+       
+    <!--    <dimension>
             <dimname>app</dimname>>
             <tablename>spider_dim.item_app</tablename>>
             <sources>
 	     <source>yingyongbao</source>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield>app_name</projectfield>
+	    <projectfields>
+            <projectfield>app_name</projectfield>
+            </projectfields>
             <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
@@ -176,7 +160,9 @@
 	     <source>weixin</source>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield>public_name</projectfield>
+	    <projectfields>
+            <projectfield>public_name</projectfield>
+            </projectfields>
             <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
@@ -190,11 +176,13 @@
 	     <source>36ke</source>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
-	    <projectfield>sName</projectfield>
+	    <projectfields>
+            <projectfield>sName</projectfield>
+            </projectfields>
             <time>2592000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
-        </dimension>> -->
+        </dimension>> 
 
         <dimension>
             <dimname>fund_base</dimname>>
@@ -203,7 +191,9 @@
                 <source>smt</source>
             </sources>>
             <companyfield>comp_full_name</companyfield>>
+            <projectfields>
             <projectfield></projectfield>
+            </projectfields>
             <time>2592000000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
@@ -216,11 +206,65 @@
                 <source>amac</source>
             </sources>>
             <companyfield>fundName</companyfield>>
+            <projectfields>
             <projectfield></projectfield>
+            </projectfields>
             <time>2592000000</time>>
             <loadtime>load_time</loadtime>>
             <sleep>10</sleep>>
-        </dimension>>
+        </dimension>>  
+        <dimension>
+            <dimname>fund_exit</dimname>>
+            <tablename>spider_dim.fund_exit</tablename>>
+            <sources>
+                <source>smt</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <projectfields>
+                <projectfield>exit_quan</projectfield>
+                <projectfield>exit_enterprise</projectfield>
+                <projectfield>exit_time</projectfield>
+                <projectfield>exit_mode</projectfield>
+                <projectfield>return_multiple</projectfield>
+                <projectfield>return_money</projectfield>
+                <projectfield>cumulative_money</projectfield>
+                <projectfield>first_time</projectfield>
+            </projectfields>
+            <time>25920000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  
+
+        <dimension>
+            <dimname>comp_gudong</dimname>>
+            <tablename>spider_dim.comp_gudong</tablename>>
+            <sources>
+                <source>tyc</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <projectfields>
+                <projectfield>p_name</projectfield>
+            </projectfields>
+            <time>864000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  
+
+        <dimension>
+            <dimname>comp_teaminfo</dimname>>
+            <tablename>spider_dim.comp_teaminfo</tablename>>
+            <sources>
+                <source>tyc</source>
+            </sources>>
+            <companyfield>comp_full_name</companyfield>>
+            <projectfields>
+                <projectfield>staffName</projectfield>
+                <projectfield>staffPosition</projectfield>
+            </projectfields>
+            <time>864000</time>>
+            <loadtime>load_time</loadtime>>
+            <sleep>10</sleep>>
+        </dimension>>  -->
     </read>>
 
 
@@ -270,10 +314,6 @@
             <tablename>dimension_sum.comp_contactinfo_sum</tablename>>
         </dimension>>
         <dimension>
-            <dimname>teaminfo</dimname>>
-            <tablename>dimension_sum.comp_teaminfo_sum</tablename>>
-        </dimension>>
-        <dimension>
             <dimname>app</dimname>>
             <tablename>dimension_sum.item_app_sum</tablename>>
         </dimension>>
@@ -294,6 +334,20 @@
         <dimension>
             <dimname>fund_base1</dimname>>
             <tablename>dimension_sum.fund_base1_sum</tablename>>
+        </dimension>>
+        <dimension>
+            <dimname>fund_exit</dimname>>
+            <tablename>dimension_sum.fund_exit_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>comp_gudong</dimname>>
+            <tablename>dimension_sum.comp_gudong_sum</tablename>>
+        </dimension>>
+
+        <dimension>
+            <dimname>comp_teaminfo</dimname>>
+            <tablename>dimension_sum.comp_teaminfo_sum</tablename>>
         </dimension>>
     </write>>
 

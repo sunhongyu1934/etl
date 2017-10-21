@@ -15,7 +15,7 @@ public class MybatisUtils {
 
         static{
             try {
-                String linpath="/data1/spider/etl/src/main/resources/Mybatis.xml";
+                String linpath="/home/spider/etl/src/main/resources/Mybatis.xml";
                 String winpath="D:\\工作\\代码\\etl\\src/main/resources/Mybatis.xml";
                 String path;
                 String os=System.getProperty("os.name");

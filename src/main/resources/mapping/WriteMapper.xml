@@ -70,13 +70,6 @@ User类就是users表所对应的实体类
         </foreach>
     </insert>
 
-    <insert id="insertteaminfo" parameterType="java.util.HashMap">
-        insert into ${tablename}(comp_full_name,staffName,staffPosition,staffIntro,onPositionStatus,headPic,staffPhone,staffEmail,only_id,source_y) values
-        <foreach collection="field" index="index" item="item" separator ="," >
-        (#{item.comp_full_name},#{item.staffName},#{item.staffPosition},#{item.staffIntro},#{item.onPositionStatus},#{item.headPic},#{item.staffPhone},#{item.staffEmail},#{item.only_id},#{item.source})
-        </foreach>
-    </insert>
-
     
     <insert id="insertjigou" parameterType="java.util.HashMap">
         insert into ${tablename}(comp_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,`describe`,filing_time,p_id,only_id,source_y) values
@@ -120,6 +113,26 @@ User类就是users表所对应的实体类
         </foreach>
     </insert>
 
+    <insert id="insertfund_exit" parameterType="java.util.HashMap">
+        insert into ${tablename}(s_id,comp_full_name,exit_quan,exit_enterprise,exit_time,exit_mode,return_multiple,return_money,cumulative_money,first_time,p_id,only_id,tail_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.s_id},#{item.comp_full_name},#{item.exit_quan},#{item.exit_enterprise},#{item.exit_time},#{item.exit_mode},#{item.return_multiple},#{item.return_money},#{item.cumulative_money},#{item.first_time},#{item.p_id},#{item.only_id},#{item.taid},#{item.source})
+        </foreach>
+    </insert>
+
+    <insert id="insertcomp_gudong" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,t_id,p_name,p_tid,chuzi_bili,renjiao_chuzi,only_id,tail_id,source_y) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.t_id},#{item.p_name},#{item.p_tid},#{item.chuzi_bili},#{item.renjiao_chuzi},#{item.only_id},#{item.taid},#{item.source})
+        </foreach>
+    </insert>
+
+    <insert id="insertcomp_teaminfo" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,staffName,staffPosition,staffIntro,onPositionStatus,headPic,staffPhone,staffEmail,only_id,source_y,tail_id) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.staffName},#{item.staffPosition},#{item.staffIntro},#{item.onPositionStatus},#{item.headPic},#{item.staffPhone},#{item.staffEmail},#{item.only_id},#{item.source},#{item.taid})
+        </foreach>
+    </insert>
 
 
 

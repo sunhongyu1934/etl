@@ -15,11 +15,16 @@
 
     <mappers>
 
-        <mapper resource="mapping/TestMapper.xml"/>
-        <mapper resource="mapping/ReadMapper.xml"/>
-        <mapper resource="mapping/WriteMapper.xml"/>
-        <mapper resource="mapping/OnlyidMapper.xml"/>
-        <mapper resource="mapping/JigouMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/TestMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/ReadMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/WriteMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/OnlyidMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/JigouMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/JijinMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/TuichuMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/GudongMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/WebMapper.xml"/>
+        <mapper url="file:////home/spider/etl/src/main/resources/mapping/TongbuMapper.xml"/>
 
     </mappers>
 </configuration>

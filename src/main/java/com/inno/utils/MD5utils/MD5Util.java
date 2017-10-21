@@ -8,7 +8,6 @@ import com.inno.utils.Dup;
 import com.inno.utils.mybatis_factory.MybatisUtils;
 import com.inno.utils.redisUtils.RedisAction;
 import com.inno.utils.spider.tycserach;
-import com.mysql.cj.core.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +18,7 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -207,14 +207,14 @@ public class MD5Util {
         return parseMd5L16ToLong(str16);
     }
 
-    public static synchronized String[] Onlyid(String cname,String source,String xiangmu) throws IOException, InterruptedException {
+    public static synchronized String[] Onlyid(String cname,String source,List<String> xiangmu) throws IOException, InterruptedException {
         String acname=FenciUtils.chuli(cname.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）","").replace(" ","").replaceAll("\\s","").replace(" ","").trim());
         String onid;
         String hasid;
         String md5;
         String taid;
-        if(Dup.nullor(xiangmu)){
-            md5 = getMD5String(acname+xiangmu).substring(8, 24);
+        if(xiangmu!=null&&xiangmu.size()>0){
+            md5 = getMD5String(acname+xiangmu.toString()).substring(8, 24);
             taid=UnsignedLong.valueOf(md5, 16).toString();
             onid=UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
             hasid=onid.substring(onid.length()-1);

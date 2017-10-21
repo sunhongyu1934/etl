@@ -12,7 +12,7 @@ public class ReadTableBean {
     private String sleep;
     private int a;
     private String tt;
-    private String projectfield;
+    private List<String> projectfield;
 
     public String getDimname() {
         return dimname;
@@ -86,11 +86,11 @@ public class ReadTableBean {
         this.tt = tt;
     }
 
-    public String getProjectfield() {
+    public List<String> getProjectfield() {
         return projectfield;
     }
 
-    public void setProjectfield(String projectfield) {
+    public void setProjectfield(List<String> projectfield) {
         this.projectfield = projectfield;
     }
 }

@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JigouServiceImpl implements JigouService {
     private static JigouDao ji=new JigouDaoImpl();
@@ -35,7 +37,11 @@ public class JigouServiceImpl implements JigouService {
         List<Map<String,Object>> ll=new ArrayList<>();
         for(Map<String,Object> mm:list){
             Map<String,Object> map=new HashMap<>();
+            if(String.valueOf(mm.get("company_abbreviation")).contains("不公开")||String.valueOf(mm.get("company_abbreviation")).contains("个人投资者")){
+                continue;
+            }
             map.put("comp_full_name", comp_full_name(String.valueOf(mm.get("comp_full_name"))));
+            map.put("comp_name",comp_name(String.valueOf(mm.get("company_abbreviation"))));
             map.put("capital_type", capital_type(String.valueOf(mm.get("capital_type"))));
             map.put("keep_on_record", keep_on_record(String.valueOf(mm.get("keep_on_record"))));
             map.put("record_date", record_date(String.valueOf(mm.get("filing_time"))));
@@ -80,7 +86,11 @@ public class JigouServiceImpl implements JigouService {
     }
 
     public static String comp_full_name(String key){
-        return key.trim().replaceAll("\\s","");
+        return Dup.renull(key);
+    }
+
+    public static String comp_name(String key){
+        return Dup.renull(key);
     }
 
     public static String capital_type(String key){
@@ -89,9 +99,9 @@ public class JigouServiceImpl implements JigouService {
 
     public static String keep_on_record(String key){
         String va=key.trim().replaceAll("\\s","").replaceAll("[^\\u4e00-\\u9fa5]","");
-        if(Dup.nullor(va)&&va.equals("是")){
+        if(Dup.nullor(va)&&va.contains("是")){
             return "1";
-        }else if(Dup.nullor(va)&&va.equals("是")){
+        }else if(Dup.nullor(va)&&va.contains("否")){
             return "0";
         }else{
             return null;
@@ -100,6 +110,8 @@ public class JigouServiceImpl implements JigouService {
 
     public static String record_date(String key){
         if(!Dup.nullor(key.trim().replaceAll("\\s",""))){
+            return null;
+        }else if(key.contains("1900-01-00")){
             return null;
         }else{
             return key.trim().replaceAll("\\s","");

@@ -1,7 +1,7 @@
 package com.inno.utils.spider;
 
 
-import com.mysql.cj.core.util.StringUtils;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -56,7 +56,7 @@ public class tycserach {
                         .ignoreContentType(true)
                         .proxy(proxy)
                         .get();
-                if (!doc.outerHtml().contains("获取验证码")&&!StringUtils.isNullOrEmpty(doc.outerHtml().replace("<html>", "").replace("<head></head>", "").replace("</body>", "").replace("<body>", "").replace("</html>", "").replace("\n", "").trim())&&!doc.outerHtml().contains("访问拒绝")&&!doc.outerHtml().contains("abuyun")&&!doc.outerHtml().contains("Unauthorized")&&!doc.outerHtml().contains("访问禁止")) {
+                if (!doc.outerHtml().contains("获取验证码")&&doc.outerHtml().length()>44&&!doc.outerHtml().contains("访问拒绝")&&!doc.outerHtml().contains("abuyun")&&!doc.outerHtml().contains("Unauthorized")&&!doc.outerHtml().contains("访问禁止")) {
                     break;
                 }
             }catch (Exception e){

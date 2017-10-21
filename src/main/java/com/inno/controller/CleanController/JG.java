@@ -1,10 +1,9 @@
-package com.inno.controller.JgController;
+package com.inno.controller.CleanController;
 
 import com.inno.service.JigouService;
 import com.inno.service.ServiceImpl.JigouServiceImpl;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

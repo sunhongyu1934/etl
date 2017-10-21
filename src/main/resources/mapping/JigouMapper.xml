@@ -27,9 +27,9 @@ User类就是users表所对应的实体类
 
 
     <insert id="insert" parameterType="java.util.HashMap">
-        insert into clean_data.institution_base_info(comp_id,comp_full_name,capital_type,keep_on_record,record_date,head_quarter,invest_type,captial_amount,capital_money_r,capital_amount_r,capital_amount_m,capital_money_m,regist_region,data_source,del_flag) values
+        insert into clean_data.institution_base_info(comp_id,comp_full_name,capital_type,keep_on_record,record_date,head_quarter,invest_type,captial_amount,capital_money_r,capital_amount_r,capital_amount_m,capital_money_m,regist_region,data_source,del_flag,comp_name) values
         <foreach collection="field" index="index" item="item" separator ="," >
-            (#{item.comp_id},#{item.comp_full_name},#{item.capital_type},#{item.keep_on_record},#{item.record_date},#{item.head_quarter},#{item.invest_type},#{item.captial_amount},#{item.capital_money_r},#{item.capital_amount_r},#{item.capital_amount_m},#{item.capital_money_m},#{item.regist_region},#{item.data_source},#{item.del_flag})
+            (#{item.comp_id},#{item.comp_full_name},#{item.capital_type},#{item.keep_on_record},#{item.record_date},#{item.head_quarter},#{item.invest_type},#{item.captial_amount},#{item.capital_money_r},#{item.capital_amount_r},#{item.capital_amount_m},#{item.capital_money_m},#{item.regist_region},#{item.data_source},#{item.del_flag},#{item.comp_name})
         </foreach>
     </insert>
 </mapper>
