@@ -2,7 +2,7 @@ package test;
 
 import com.inno.utils.Dup;
 import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 
 import java.io.IOException;
 import java.sql.*;
@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 
 public class jijinpanduan {
     private static Connection conn;
-    private static RedisAction redisAction;
+    private static RedisClu redisAction;
 
     static{
 
@@ -46,7 +46,7 @@ public class jijinpanduan {
 
 
         conn=con;
-        redisAction=new RedisAction("10.44.51.90",6379);
+        redisAction=new RedisClu();
     }
 
     public static void main(String args[]){

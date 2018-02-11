@@ -1,13 +1,9 @@
 package com.inno.utils.MD5utils;
 
 import com.google.common.primitives.UnsignedLong;
-import com.inno.bean.OnlyidBean;
 import com.inno.service.OnlyIdService;
 import com.inno.service.ServiceImpl.OnlyIdServiceImpl;
-import com.inno.utils.Dup;
-import com.inno.utils.mybatis_factory.MybatisUtils;
-import com.inno.utils.redisUtils.RedisAction;
-import com.inno.utils.spider.tycserach;
+import com.inno.utils.redisUtils.RedisClu;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,14 +25,14 @@ public class MD5Util {
             '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
     protected static MessageDigest messagedigest = null;
     private static OnlyIdService onn;
-    private static RedisAction rd;
+    private static RedisClu rd;
 
 
     static {
         try {
             messagedigest = MessageDigest.getInstance("MD5");
             onn=new OnlyIdServiceImpl();
-            rd=new RedisAction("10.44.51.90",6379);
+            rd=new RedisClu();
         } catch (NoSuchAlgorithmException e) {
             System.out.println("MD5FileUtil messagedigest初始化失败");
         }
@@ -237,13 +233,13 @@ public class MD5Util {
         }
         if(!bo) {
             if(source.equals("tyc")){
-                Map<String,String> map=new HashMap<>();
+                /*Map<String,String> map=new HashMap<>();
                 map.put("be_company_name",cname);
                 map.put("af_company_name",acname);
                 map.put("only_id",onid);
                 map.put("hash_id",hasid);
                 map.put("register_or","0");
-                onn.insert(map);
+                onn.insert(map);*/
                 while (true) {
                     try {
                         rd.set("zhuce", onid);
@@ -254,13 +250,13 @@ public class MD5Util {
                 }
                 return new String[]{onid,hasid,taid};
             }else{
-                Map<String, String> map = new HashMap<>();
+                /*Map<String, String> map = new HashMap<>();
                 map.put("be_company_name", cname);
                 map.put("af_company_name", acname);
                 map.put("only_id", onid);
                 map.put("hash_id", hasid);
                 map.put("register_or", "1");
-                onn.insert(map);
+                onn.insert(map);*/
                 return new String[]{onid,hasid,taid};
             }/*else {
                 boolean bb = tycserach.serach(cname);
@@ -297,11 +293,11 @@ public class MD5Util {
                 }
             }*/
         }else{
-            Map<String,String> map=new HashMap<>();
+   /*         Map<String,String> map=new HashMap<>();
             map.put("be_company_name",cname);
             map.put("af_company_name",acname);
             map.put("only_id",onid);
-            map.put("hash_id",hasid);
+            map.put("hash_id",hasid);*/
             return new String[]{onid,hasid,taid};
         }
     }

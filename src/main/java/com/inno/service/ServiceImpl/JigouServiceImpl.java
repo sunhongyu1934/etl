@@ -4,7 +4,7 @@ import com.inno.dao.Impl.JigouDaoImpl;
 import com.inno.dao.JigouDao;
 import com.inno.service.JigouService;
 import com.inno.utils.Dup;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 import com.inno.utils.spider.JsoupUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,14 +15,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class JigouServiceImpl implements JigouService {
     private static JigouDao ji=new JigouDaoImpl();
-    private static RedisAction rs;
+    private static RedisClu rs;
     static {
-        rs=new RedisAction("10.44.51.90",6379);
+        rs=new RedisClu();
     }
 
 

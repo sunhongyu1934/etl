@@ -15,16 +15,17 @@
 
     <mappers>
 
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/TestMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/ReadMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/WriteMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/OnlyidMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/JigouMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/JijinMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/TuichuMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/GudongMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/WebMapper.xml"/>
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/TongbuMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/TestMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/ReadMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/WriteMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/OnlyidMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/JigouMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/JijinMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/TuichuMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/GudongMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/WebMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/TongbuMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/ShortnameMapper.xml"/>
 
     </mappers>
 </configuration>

@@ -7,12 +7,9 @@ public class ReadTableBean {
     private String tablename;
     private List<String> sources;
     private String companyfield;
-    private String time;
-    private String loadtime;
     private String sleep;
-    private int a;
-    private String tt;
     private List<String> projectfield;
+    private String id;
 
     public String getDimname() {
         return dimname;
@@ -46,22 +43,6 @@ public class ReadTableBean {
         this.companyfield = companyfield;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getLoadtime() {
-        return loadtime;
-    }
-
-    public void setLoadtime(String loadtime) {
-        this.loadtime = loadtime;
-    }
-
     public String getSleep() {
         return sleep;
     }
@@ -70,27 +51,19 @@ public class ReadTableBean {
         this.sleep = sleep;
     }
 
-    public int getA() {
-        return a;
-    }
-
-    public void setA(int a) {
-        this.a = a;
-    }
-
-    public String getTt() {
-        return tt;
-    }
-
-    public void setTt(String tt) {
-        this.tt = tt;
-    }
-
     public List<String> getProjectfield() {
         return projectfield;
     }
 
     public void setProjectfield(List<String> projectfield) {
         this.projectfield = projectfield;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

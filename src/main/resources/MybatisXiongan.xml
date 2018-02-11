@@ -4,7 +4,7 @@
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC" />
-            <dataSource type="com.inno.utils.dbcputils.dbcpXin">
+            <dataSource type="com.inno.utils.dbcputils.dbcpXionganDatasourceFactory">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
                 <property name="url" value="jdbc:mysql://etl2.innotree.org:3308/spider" />
                 <property name="username" value="spider" />
@@ -15,7 +15,7 @@
 
     <mappers>
 
-        <mapper url="file:////data1/spider/etl/src/main/resources/mapping/TongbuMapper.xml"/>
+        <mapper url="file:////data1/etl/src/main/resources/mapping/TongbuMapper.xml"/>
 
     </mappers>
 </configuration>

@@ -6,9 +6,6 @@ import com.inno.bean.WriteTableBean;
 import com.inno.service.ServiceImpl.TongbuServiceImpl;
 import com.inno.service.TongbuService;
 import com.inno.utils.ConfigureUtils.company_parse;
-import com.inno.utils.Dup;
-import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.mybatis_factory.MybatisXin;
 import org.dom4j.DocumentException;
 
 import java.io.FileNotFoundException;

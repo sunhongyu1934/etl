@@ -19,9 +19,7 @@ public class ReadServiceImpl implements ReadService {
         Map<String, String> map;
         map = new HashMap<String, String>();
         map.put("tablename", be.getTablename() + "_" + source);
-        map.put("loadtime", be.getLoadtime());
-        map.put("betime", be.getTt());
-        map.put("lim", String.valueOf(be.getA()));
+        map.put("id",be.getId());
 
         return re.findTimeList(map);
     }

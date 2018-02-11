@@ -22,7 +22,7 @@ public class dbcpDatasourceFactory implements DataSourceFactory{
     @Override
     public DataSource getDataSource() {
         InputStream in = null;
-        String linpath="/home/spider/etl/src/main/resources/dbcppro/dbcpconfig.properties";
+        String linpath="/data1/etl/src/main/resources/dbcppro/dbcpconfig.properties";
         String winpath="D:\\工作\\代码\\etl\\src/main/resources/dbcppro/dbcpconfig.properties";
         String path;
         String os=System.getProperty("os.name");

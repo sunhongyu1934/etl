@@ -8,15 +8,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class MybatisXin {
+public class MybatisXionganUtils {
     private static class SqlSessionHolder{
         private static InputStream in;
         private static SqlSession  session;
 
         static{
             try {
-                String linpath="/home/spider/etl/src/main/resources/MybatisXin.xml";
-                String winpath="D:\\工作\\代码\\etl\\src/main/resources/MybatisXin.xml";
+                String linpath="/data1/etl/src/main/resources/MybatisXiongan.xml";
+                String winpath="D:\\工作\\代码\\etl\\src/main/resources/MybatisXiongan.xml";
                 String path;
                 String os=System.getProperty("os.name");
                 if(os.contains("Windows")){
@@ -32,7 +32,7 @@ public class MybatisXin {
         }
     }
 
-    private MybatisXin(){}
+    private MybatisXionganUtils(){}
     public static final SqlSession getInstance(){
         return SqlSessionHolder.session;
     }

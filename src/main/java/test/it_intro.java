@@ -1,9 +1,8 @@
 package test;
 
 import com.google.common.primitives.UnsignedLong;
-import com.google.gson.Gson;
 import com.inno.utils.MD5utils.FenciUtils;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -16,12 +15,34 @@ import static com.inno.utils.MD5utils.MD5Util.getMD5String;
 
 public class it_intro {
     private static Connection conn;
-    private static RedisAction rd;
+    private static RedisClu rd;
     static{
+        rd=new RedisClu();
+
+    }
+
+    public static void main(String args[]) throws SQLException {
+        /*String a=args[0];
+        String b=args[1];
+        String c=args[2];
+        String d=args[3];
+
+        String data=args[4];
+
         String driver1="com.mysql.jdbc.Driver";
-        String url1="jdbc:mysql://etl1.innotree.org:3308/spider";
+        String url1="jdbc:mysql://172.31.215.38:3306/spider";
         String username="spider";
         String password="spider";
+
+        if(data.equals("kaifa")){
+            url1="jdbc:mysql://172.31.215.36:3306/innotree_data_project";
+            username="sunhongyu";
+            password="yJdviIeSuicKn8xX";
+        }else if(data.equals("xianshang")){
+            url1="jdbc:mysql://172.31.215.37:3306/innotree_data_online";
+            username="test";
+            password="123456";
+        }
         try {
             Class.forName(driver1).newInstance();
         } catch (InstantiationException e) {
@@ -47,15 +68,10 @@ public class it_intro {
             }
         }
         conn=con;
-        rd=new RedisAction("10.44.51.90",6379);
 
-    }
 
-    public static void main(String args[]) throws SQLException {
-        /*String a=args[0];
-        String b=args[1];
-        String c=args[2];
-        String d=args[3];
+
+
         chu4(a,b,c,d);*/
 
         /*it_intro i=new it_intro();
@@ -86,10 +102,56 @@ public class it_intro {
                 }
             });
         }*/
-        String t=args[0];
+        /*String t=args[0];
         String f=args[1];
-        tail(t,f);
+        tail(t,f);*/
 
+        String a=args[0];
+        String b=args[1];
+        String c=args[2];
+        String d=args[3];
+        String data=args[4];
+        String driver1="com.mysql.jdbc.Driver";
+        String url1="jdbc:mysql://172.31.215.38:3306/spider";
+        String username="spider";
+        String password="spider";
+
+        if(data.equals("kaifa")){
+            url1="jdbc:mysql://172.31.215.36:3306/innotree_data_project";
+            username="sunhongyu";
+            password="yJdviIeSuicKn8xX";
+        }else if(data.equals("xianshang")){
+            url1="jdbc:mysql://172.31.215.46:3306/innotree_data_online";
+            username="base";
+            password="imkloKuLiqNMc6Cn";
+        }
+        try {
+            Class.forName(driver1).newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        java.sql.Connection con=null;
+        try {
+            con = DriverManager.getConnection(url1, username, password);
+        }catch (Exception e){
+            while(true){
+                try {
+                    con = DriverManager.getConnection(url1, username, password);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                if(con!=null){
+                    break;
+                }
+            }
+        }
+        conn=con;
+        chu4(a,b,c,d);
+        //tail();
     }
 
     public static void chu() throws SQLException {
@@ -122,24 +184,27 @@ public class it_intro {
     }
 
     public static void chu2() throws SQLException {
-        String sql="select comp_id from company_base_info";
-        PreparedStatement ps=conn.prepareStatement(sql);
+        int a = 0;
+        for(int x=0;x<=9;x++) {
+            String sql = "select DISTINCT comp_id from dimension_sum.comp_intro_total_sum"+x;
+            PreparedStatement ps = conn.prepareStatement(sql);
 
-        String sql2="update company_base_info set del_flag=1 where comp_id=?";
-        PreparedStatement ps2=conn.prepareStatement(sql2);
-        ResultSet rs=ps.executeQuery();
-        int a=0;
-        while (rs.next()){
-            String na=rs.getString(rs.findColumn("comp_id"));
+            String sql2 = "update dimension_sum.comp_intro_total_sum"+x+" set is_reg=1 where comp_id=?";
+            PreparedStatement ps2 = conn.prepareStatement(sql2);
+            ResultSet rs = ps.executeQuery();
 
-            //String acname= FenciUtils.chuli(na.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）","").replace(" ","").replaceAll("\\s","").replace(" ","").trim());
-           //String onid= UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
-            if(!rd.get("zhuce",na)){
-                ps2.setString(1,na);
-                ps2.executeUpdate();
+            while (rs.next()) {
+                String na = rs.getString(rs.findColumn("comp_id"));
+
+                //String acname= FenciUtils.chuli(na.replace("省","").replace("市","").replace("区","").replace("(","").replace(")","").replace("（","").replace("）","").replace(" ","").replaceAll("\\s","").replace(" ","").trim());
+                //String onid= UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+                if (rd.get("zhuce", na)) {
+                    ps2.setString(1, na);
+                    ps2.executeUpdate();
+                }
+                a++;
+                System.out.println(a + "*************************************");
             }
-            a++;
-            System.out.println(a+"*************************************");
         }
     }
 
@@ -198,7 +263,7 @@ public class it_intro {
     public static void qygx(Qy q) throws InterruptedException, SQLException {
         String sql2="insert into company_qygx_xin(id,tyc_id,cs_id,company_name,qygx_json) values(?,?,?,?,?)";
         PreparedStatement ps2=conn.prepareStatement(sql2);
-        RedisAction rd=new RedisAction("10.44.51.90",6379);
+        RedisClu rd=new RedisClu();
         int a = 0;
         while (true){
             try {
@@ -259,7 +324,7 @@ public class it_intro {
         PreparedStatement ps2=conn.prepareStatement(sql2);
         int p = 0;
         for(int q=1;q<=10;q++) {
-            String sql = "select id,"+f+" from "+t+" limit "+p+","+ff;
+            String sql = "select id,"+f+" from "+t+" where "+d+"='' or "+d+" is null or "+d+"='0' limit "+p+","+ff;
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -279,19 +344,19 @@ public class it_intro {
                     a++;
                     System.out.println(a + "***************************************************");
                 }catch (Exception e){
+                    e.printStackTrace();
                     System.out.println("error");
                 }
             }
-            p=p+Integer.parseInt(ff);
         }
     }
 
-    public static void tail(String ta,String ff) throws SQLException {
-        String sql2="update "+ta+" set comp_id=?,tail_id=? where id=?";
+    public static void tail() throws SQLException {
+        String sql2="update company_manager set tail_id=? where id=?";
         PreparedStatement ps2=conn.prepareStatement(sql2);
         int p = 0;
         for(int q=1;q<=10;q++) {
-                String sql = "select id,comp_full_name,`manager_name`,`manager_position` from "+ta+" where tail_id='' or tail_id is null";
+            String sql = "select id,comp_full_name,`manager_name` from company_manager limit "+p+",2000000";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -302,18 +367,15 @@ public class it_intro {
                     String id = rs.getString(rs.findColumn("id"));
                     String cname = rs.getString(rs.findColumn("comp_full_name"));
                     String pname = rs.getString(rs.findColumn("manager_name"));
-                    String zhi_wu = rs.getString(rs.findColumn("manager_position"));
                     List<String> list = new ArrayList<>();
                     list.add(pname);
-                    list.add(zhi_wu);
 
                     String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
                     String onid = UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
                     String taid = UnsignedLong.valueOf(getMD5String(acname + list.toString()).substring(8, 24), 16).toString();
 
-                    ps2.setString(1, onid);
-                    ps2.setString(2, taid);
-                    ps2.setInt(3, Integer.parseInt(id));
+                    ps2.setString(1, taid);
+                    ps2.setInt(2, Integer.parseInt(id));
                     a++;
                     ps2.executeUpdate();
                     System.out.println(a + "***************************************************");
@@ -321,8 +383,7 @@ public class it_intro {
                     System.out.println("error");
                 }
             }
-            p=p+Integer.parseInt(ff);
-            break;
+            p=p+2000000;
         }
     }
 

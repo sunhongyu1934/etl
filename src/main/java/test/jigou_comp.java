@@ -2,12 +2,9 @@ package test;
 
 import com.google.common.primitives.UnsignedLong;
 import com.inno.utils.MD5utils.FenciUtils;
-import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.redisUtils.RedisAction;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 
 import static com.inno.utils.MD5utils.MD5Util.getMD5String;
 

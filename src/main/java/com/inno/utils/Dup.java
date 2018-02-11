@@ -1,8 +1,6 @@
 package com.inno.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,5 +42,24 @@ public class Dup {
         }else{
             return null;
         }
+    }
+
+    public static void mapvaluepaixu(Map<String,Integer> us){
+        Set<Map.Entry<String, Integer>> ks = us.entrySet();
+        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(
+                ks);
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+
+            @Override
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                if (o1.getValue() < o2.getValue())
+                    return -1;
+                else if (o1.getValue() > o2.getValue())
+                    return 1;
+                return 0;
+            }
+        });
+        System.out.println(list);
     }
 }

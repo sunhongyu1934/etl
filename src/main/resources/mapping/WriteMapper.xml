@@ -134,6 +134,13 @@ User类就是users表所对应的实体类
         </foreach>
     </insert>
 
+    <insert id="insertcomp_duiwai" parameterType="java.util.HashMap">
+        insert into ${tablename}(comp_full_name,t_id,invest_name,invest_tid,representative,rep_tid,register_amount,register_date,investment_amount,investment_rate,com_status,only_id,source_y,tail_id) values
+        <foreach collection="field" index="index" item="item" separator ="," >
+            (#{item.comp_full_name},#{item.t_id},#{item.invest_name},#{item.invest_tid},#{item.representative},#{item.rep_tid},#{item.register_amount},#{item.register_date},#{item.investment_amount},#{item.investment_rate},#{item.com_status},#{item.only_id},#{item.source},#{item.taid})
+        </foreach>
+    </insert>
+
 
 
 

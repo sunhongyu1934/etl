@@ -5,7 +5,7 @@ import com.inno.bean.WriteTableBean;
 import com.inno.dao.TongbuDao;
 import com.inno.utils.Dup;
 import com.inno.utils.mybatis_factory.MybatisUtils;
-import com.inno.utils.mybatis_factory.MybatisXin;
+import com.inno.utils.mybatis_factory.MybatisXionganUtils;
 
 import java.util.*;
 
@@ -26,7 +26,7 @@ public class TongbuDaoImpl implements TongbuDao {
         mmp.put("tablename", w.getTablename());
         mmp.put("field",lists);
         if(lists!=null&&lists.size()>0) {
-            MybatisXin.getInstance().insert(ns, mmp);
+            MybatisXionganUtils.getInstance().insert(ns, mmp);
         }
 
     }
@@ -65,7 +65,7 @@ public class TongbuDaoImpl implements TongbuDao {
         mmp.put("tablename", w.getTablename() );
         mmp.put("field",ll);
         if(ll!=null&&ll.size()>0) {
-            MybatisXin.getInstance().delete(ns, mmp);
+            MybatisXionganUtils.getInstance().delete(ns, mmp);
         }
 
 

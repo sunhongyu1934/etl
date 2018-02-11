@@ -14,6 +14,6 @@ User类就是users表所对应的实体类
  -->
     <select id="getRead" parameterType="java.util.HashMap"
             resultType="java.util.HashMap">
-        select * from ${tablename} where ${loadtime}>#{betime} limit ${lim},500000
+        select * from ${tablename} where id>#{id} limit 200000
     </select>
 </mapper>

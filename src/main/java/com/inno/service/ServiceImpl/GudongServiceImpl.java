@@ -3,19 +3,13 @@ package com.inno.service.ServiceImpl;
 import com.inno.bean.TongbuBean;
 import com.inno.dao.GudongDao;
 import com.inno.dao.Impl.GudongDaoImpl;
-import com.inno.dao.Impl.JigouDaoImpl;
 import com.inno.dao.Impl.TongbuDaoImpl;
-import com.inno.dao.JigouDao;
 import com.inno.dao.TongbuDao;
 import com.inno.service.GudongService;
-import com.inno.utils.ConfigureUtils.company_parse;
 import com.inno.utils.Dup;
 import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.mybatis_factory.MybatisUtils;
-import com.inno.utils.redisUtils.RedisAction;
-import org.dom4j.DocumentException;
+import com.inno.utils.redisUtils.RedisClu;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -27,12 +21,10 @@ import java.util.regex.Pattern;
 public class GudongServiceImpl implements GudongService {
     private static GudongDao ji=new GudongDaoImpl();
     private static TongbuDao t=new TongbuDaoImpl();
-    private static RedisAction rs;
-    private static RedisAction rss;
+    private static RedisClu rs;
     private static TongbuBean.Write tb=new TongbuBean.Write();
     static {
-        rs=new RedisAction("10.44.51.90",6379);
-        rss=new RedisAction("a027.hb2.innotree.org",6379);
+        rs=new RedisClu();
         tb.setOnid("tail_id");
         tb.setDimname("gudong");
         tb.setTablename("innotree_data.company_shareholder");
@@ -174,7 +166,8 @@ public class GudongServiceImpl implements GudongService {
 
     public static void insert(List<Map<String,Object>> list) {
         Map<String,Object> map=new HashMap<>();
-        map.put("field",list);
+        List<Map<String,Object>> list0=Dup.quchong(list,"tail_id");
+        map.put("field",list0);
         ji.insert(map);
     }
 
@@ -241,7 +234,7 @@ public class GudongServiceImpl implements GudongService {
                     String mon = Dup.renull(key).replace("万元", "").replace("人民币", "").replace("(", "").replace(")", "").replace(",", "").replace("万", "").replace("美元", "").replace("元", "").replaceAll("[^0-9\\.]", "");
                     if (Dup.nullor(mon)) {
                         if (key.contains("美元")&&key.contains("万")) {
-                            float d = Float.parseFloat("0.15");
+                            float d = Float.parseFloat("6.61");
                             DecimalFormat decimalFormat = new DecimalFormat(".00");
                             float jie = Float.parseFloat(mon) * d;
                             String jieguo;
@@ -258,7 +251,7 @@ public class GudongServiceImpl implements GudongService {
                                 return jieguo;
                             }
                         } else if (key.contains("美元") && !key.contains("万")) {
-                            float d = Float.parseFloat("0.15");
+                            float d = Float.parseFloat("6.61");
                             DecimalFormat decimalFormat = new DecimalFormat(".00");
                             float jie = (Float.parseFloat(mon) * d) / 10000;
                             String jieguo;
@@ -274,7 +267,143 @@ public class GudongServiceImpl implements GudongService {
                             }else {
                                 return jieguo;
                             }
-                        } else {
+                        } else if (key.contains("港币") && key.contains("万")) {
+                            float d = Float.parseFloat("0.85");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = Float.parseFloat(mon) * d;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        } else if (key.contains("港币") && !key.contains("万")) {
+                            float d = Float.parseFloat("0.85");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = (Float.parseFloat(mon) * d) / 10000;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else if (key.contains("英镑") && key.contains("万")) {
+                            float d = Float.parseFloat("8.90");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = Float.parseFloat(mon) * d;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else if (key.contains("英镑") && !key.contains("万")) {
+                            float d = Float.parseFloat("8.90");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = (Float.parseFloat(mon) * d) / 10000;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else if (key.contains("欧") && key.contains("万")) {
+                            float d = Float.parseFloat("7.8");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = Float.parseFloat(mon) * d;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else if (key.contains("欧") && !key.contains("万")) {
+                            float d = Float.parseFloat("7.8");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = (Float.parseFloat(mon) * d) / 10000;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else if (key.contains("台币") && key.contains("万")) {
+                            float d = Float.parseFloat("0.22");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = Float.parseFloat(mon) * d;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else if (key.contains("台币") && !key.contains("万")) {
+                            float d = Float.parseFloat("0.22");
+                            DecimalFormat decimalFormat = new DecimalFormat(".00");
+                            float jie = (Float.parseFloat(mon) * d) / 10000;
+                            String jieguo;
+                            if (jie < 1) {
+                                decimalFormat = new DecimalFormat("0.00");
+                            }
+                            jieguo = decimalFormat.format(jie);
+                            if (jieguo.contains(".") && jieguo.split("\\.")[1].length() > 2) {
+                                jieguo = jieguo.split("\\.", 2)[0] + "." + jieguo.split("\\.", 2)[1].substring(0, 2);
+                            }
+                            if(occurTimes(jieguo,".")>1){
+                                return null;
+                            }else {
+                                return jieguo;
+                            }
+                        }else {
                             if (mon.contains(".") && mon.split("\\.")[1].length() > 2) {
                                 mon = mon.split("\\.", 2)[0] + "." + mon.split("\\.", 2)[1].substring(0, 2);
                             }

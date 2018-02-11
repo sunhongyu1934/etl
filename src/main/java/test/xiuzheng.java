@@ -3,16 +3,12 @@ package test;
 import com.google.common.primitives.UnsignedLong;
 import com.inno.utils.MD5utils.FenciUtils;
 import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class xiuzheng {
-    private static RedisAction r=new RedisAction("10.44.51.90",6379);
+    private static RedisClu r=new RedisClu();
     private static Connection conn;
     static{
         String driver1="com.mysql.cj.jdbc.Driver";

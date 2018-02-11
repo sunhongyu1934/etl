@@ -4,6 +4,7 @@ import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.dictionary.CustomDictionary;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
+import com.inno.utils.Dup;
 import com.inno.utils.mybatis_factory.MybatisUtils;
 
 import java.io.StringReader;
@@ -20,7 +21,7 @@ public class FenciUtils {
 
     static{
         String driver1="com.mysql.jdbc.Driver";
-        String url1="jdbc:mysql://etl1.innotree.org:3308/dimension_sum";
+        String url1="jdbc:mysql://172.31.215.38:3306/dimension_sum";
         String username="spider";
         String password="spider";
         try {
@@ -65,18 +66,23 @@ public class FenciUtils {
         }
     }
 
-    public static String chuli(String cname){
-        List<Term> list=seg.seg(cname);
-        for(Term t:list){
-            if(t.toString().split("/")[1].equals("ns")){
-                cname=t.word+cname.replace(t.word,"");
+    public static String chuli(String cnames){
+        String cname=cnames.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim();
+        if(Dup.nullor(cname)) {
+            List<Term> list = seg.seg(cname);
+            for (Term t : list) {
+                if (t.toString().split("/")[1].equals("ns")) {
+                    cname = t.word + cname.replace(t.word, "");
+                }
             }
+            if (cname.contains("中国")) {
+                cname = "中国" + cname.replace("中国", "");
+            }
+            String cc = cname;
+            return cc;
+        }else{
+            return null;
         }
-        if(cname.contains("中国")){
-            cname="中国"+cname.replace("中国","");
-        }
-        String cc=cname;
-        return cc;
 
     }
 

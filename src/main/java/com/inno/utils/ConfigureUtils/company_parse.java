@@ -23,7 +23,7 @@ public class company_parse {
 
     public static List<ReadTableBean> getAllDimensionRead() throws DocumentException, FileNotFoundException {
         SAXReader sax=new SAXReader();
-        String linpath="/home/spider/etl/src/main/resources/tablepro/table.xml";
+        String linpath="/data1/etl/src/main/resources/tablepro/table.xml";
         String winpath="D:\\工作\\代码\\etl\\src/main/resources/tablepro/table.xml";
         String path;
         String os=System.getProperty("os.name");
@@ -55,8 +55,6 @@ public class company_parse {
             redt.setCompanyfield(ele.element("companyfield").getText());
             redt.setTablename(ele.element("tablename").getText());
             redt.setSources(sources);
-            redt.setTime(ele.element("time").getText());
-            redt.setLoadtime(ele.element("loadtime").getText());
             redt.setSleep(ele.element("sleep").getText());
             redt.setProjectfield(pros);
             list.add(redt);
@@ -66,7 +64,7 @@ public class company_parse {
 
     public static List<WriteTableBean> getAllDimensionWrite() throws DocumentException, FileNotFoundException {
         SAXReader sax=new SAXReader();
-        String linpath="/home/spider/etl/src/main/resources/tablepro/table.xml";
+        String linpath="/data1/etl/src/main/resources/tablepro/table.xml";
         String winpath="D:\\工作\\代码\\etl\\src/main/resources/tablepro/table.xml";
         String path;
         String os=System.getProperty("os.name");
@@ -94,7 +92,7 @@ public class company_parse {
 
     public static Map<String,Object> getTongbu() throws DocumentException, FileNotFoundException {
         SAXReader sax=new SAXReader();
-        String linpath="/data1/spider/etl/src/main/resources/tablepro/tongbutable.xml";
+        String linpath="/data1/etl/src/main/resources/tablepro/tongbutable.xml";
         String winpath="D:\\工作\\代码\\etl\\src/main/resources/tablepro/tongbutable.xml";
         String path;
         String os=System.getProperty("os.name");

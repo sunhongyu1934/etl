@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class dbcpXin implements DataSourceFactory{
+public class dbcpXionganDatasourceFactory implements DataSourceFactory{
 
     private DataSource dataSource;
 
@@ -22,7 +22,7 @@ public class dbcpXin implements DataSourceFactory{
     @Override
     public DataSource getDataSource() {
         InputStream in = null;
-        String linpath="/home/spider/etl/src/main/resources/dbcppro/dbcpconfigxin.properties";
+        String linpath="/data1/etl/src/main/resources/dbcppro/dbcpconfigxin.properties";
         String winpath="D:\\工作\\代码\\etl\\src/main/resources/dbcppro/dbcpconfigxin.properties";
         String path;
         String os=System.getProperty("os.name");

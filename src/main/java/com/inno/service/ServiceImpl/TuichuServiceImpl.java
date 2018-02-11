@@ -1,13 +1,11 @@
 package com.inno.service.ServiceImpl;
 
-import com.inno.dao.Impl.JigouDaoImpl;
 import com.inno.dao.Impl.TuichuDaoImpl;
-import com.inno.dao.JigouDao;
 import com.inno.dao.TuichuDao;
 import com.inno.service.TuichuService;
 import com.inno.utils.Dup;
 import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 import com.inno.utils.spider.JsoupUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,9 +17,9 @@ import java.util.*;
 
 public class TuichuServiceImpl implements TuichuService {
     private static TuichuDao ji=new TuichuDaoImpl();
-    private static RedisAction rs;
+    private static RedisClu rs;
     static {
-        rs=new RedisAction("10.44.51.90",6379);
+        rs=new RedisClu();
     }
 
     @Override

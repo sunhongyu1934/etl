@@ -1,6 +1,5 @@
 package test;
 
-import com.inno.utils.redisUtils.RedisAction;
 import net.sf.json.JSONObject;
 
 import java.sql.*;
@@ -72,7 +71,7 @@ public class pinjiejson {
             while (rs2.next()){
                 Map<String,String> mapp=new HashMap<>();
                 String gname=rs2.getString(rs2.findColumn("pro_name"));
-                String gid=rs.getString(rs.findColumn("pro_id"));
+                String gid=rs2.getString(rs2.findColumn("pro_id"));
                 mapp.put("pid",gid);
                 mapp.put("name",gname);
                 mapp.put("value","");

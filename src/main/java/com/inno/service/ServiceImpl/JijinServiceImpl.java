@@ -5,7 +5,7 @@ import com.inno.dao.JijinDao;
 import com.inno.service.JijinService;
 import com.inno.utils.Dup;
 import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -13,12 +13,12 @@ import java.util.*;
 
 public class JijinServiceImpl implements JijinService {
     private static JijinDao j=new JijinDaoImpl();
-    private static RedisAction rs;
+    private static RedisClu rs;
     private static List<Map<String,Object>> glist;
     private static List<Map<String,Object>> alist;
 
     static{
-        rs=new RedisAction("10.44.51.90",6379);
+        rs=new RedisClu();
         glist=j.findGid();
     }
 

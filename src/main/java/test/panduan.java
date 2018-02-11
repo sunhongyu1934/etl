@@ -3,18 +3,14 @@ package test;
 import com.google.common.primitives.UnsignedLong;
 import com.inno.utils.MD5utils.FenciUtils;
 import com.inno.utils.MD5utils.MD5Util;
-import com.inno.utils.redisUtils.RedisAction;
+import com.inno.utils.redisUtils.RedisClu;
 
 import java.io.IOException;
-import java.net.Authenticator;
-import java.net.InetSocketAddress;
-import java.net.PasswordAuthentication;
-import java.net.Proxy;
 import java.sql.*;
 
 public class panduan {
     private static Connection conn;
-    private static RedisAction redisAction;
+    private static RedisClu redisAction;
 
     static{
 
@@ -49,7 +45,7 @@ public class panduan {
 
 
         conn=con;
-        redisAction=new RedisAction("10.44.51.90",6379);
+        redisAction=new RedisClu();
     }
 
     public static void main(String args[]) throws InterruptedException, SQLException, IOException {
