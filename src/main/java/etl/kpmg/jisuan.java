@@ -12,7 +12,7 @@ public class jisuan {
     private static Connection conn;
     static{
         String driver1="com.mysql.jdbc.Driver";
-        String url1="jdbc:mysql://172.31.215.36:3306/kpmg_data";
+        String url1="jdbc:mysql://172.31.215.36:3306/innotree_data_online";
         String username="base";
         String password="imkloKuLiqNMc6Cn";
         try {
@@ -48,7 +48,7 @@ public class jisuan {
     }
 
     public static void data() throws SQLException {
-        String sql="select id,comp_rate,comp_rate_1,comp_rate_2,comp_rate_3,comp_rate_4,comp_rate_5,comp_rate_6,comp_rate_7,patent_rate,patent_rate_1,patent_rate_2,patent_rate_3,patent_rate_4,patent_rate_5,patent_rate_6,patent_rate_7,finance_num_rate,finance_num_rate_1,finance_num_rate_2,finance_num_rate_3,finance_num_rate_4,finance_num_rate_5,finance_num_rate_6,finance_num_rate_7,finance_amount_rate,finance_amount_rate_1,finance_amount_rate_2,finance_amount_rate_3,finance_amount_rate_4,finance_amount_rate_5,finance_amount_rate_6,finance_amount_rate_7 from kpmg_quarter_count";
+        String sql="select id,comp_rate,comp_rate_1,comp_rate_2,comp_rate_3,comp_rate_4,comp_rate_5,comp_rate_6,comp_rate_7,patent_rate,patent_rate_1,patent_rate_2,patent_rate_3,patent_rate_4,patent_rate_5,patent_rate_6,patent_rate_7,finance_num_rate,finance_num_rate_1,finance_num_rate_2,finance_num_rate_3,finance_num_rate_4,finance_num_rate_5,finance_num_rate_6,finance_num_rate_7,finance_amount_rate,finance_amount_rate_1,finance_amount_rate_2,finance_amount_rate_3,finance_amount_rate_4,finance_amount_rate_5,finance_amount_rate_6,finance_amount_rate_7 from chain_quarter_count_bak";
         PreparedStatement ps=conn.prepareStatement(sql);
         ResultSet rs=ps.executeQuery();
 
@@ -97,7 +97,7 @@ public class jisuan {
             list4.add(rs.getString(rs.findColumn("finance_amount_rate_7")));
 
 
-            String sqls="update kpmg_quarter_count set avg_comp_rate=?,avg_patent_rate=?,avg_finance_num_rate=?,avg_finance_amount_rate=?,grow_rate_avg=? where id=?";
+            String sqls="update chain_quarter_count_bak set avg_comp_rate=?,avg_patent_rate=?,avg_finance_num_rate=?,avg_finance_amount_rate=?,grow_rate_avg=? where id=?";
             PreparedStatement pss=conn.prepareStatement(sqls);
 
 

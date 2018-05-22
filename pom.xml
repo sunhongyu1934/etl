@@ -134,7 +134,7 @@
 
 
   <build>
-    <finalName>area</finalName>
+    <finalName>sendcomp</finalName>
     <plugins>
 
       <plugin>
@@ -146,7 +146,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>etl.kejijinrong.area</mainClass>
+              <mainClass>com.inno.controller.SmallController.sendcomp</mainClass>
             </manifest>
           </archive>
         </configuration>

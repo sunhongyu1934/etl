@@ -54,45 +54,77 @@ public class tupucomp {
         data(ta);
     }
 
+    public static boolean check() throws SQLException {
+        String sql="select id from comp_name_bulu_first where (mark_time='' or mark_time is null) limit 10";
+        PreparedStatement ps=conn.prepareStatement(sql);
+        ResultSet rs=ps.executeQuery();
+        boolean bo=false;
+        while (rs.next()){
+            bo=true;
+        }
+        return bo;
+    }
+
     public static void data(String ta) throws SQLException {
-        String sql0="select id,comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and cover_flag=2";
-        PreparedStatement ps0=conn.prepareStatement(sql0);
-        ResultSet rs0=ps0.executeQuery();
-
-        java.util.Date date=new Date();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time=simpleDateFormat.format(date);
-
-        Set<String> set=rd.getAllset("comp_in_name");
-        Set<String> ss=new HashSet<>();
-
-        int a=0;
-        while (rs0.next()){
-            try {
-                String cname = rs0.getString(rs0.findColumn("comp_full_name"));
-                String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
-                String compid = UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
-                rd.set("tupu", compid);
-                ss.add(cname);
-                a++;
-                System.out.println(a + "************************************************************");
-            }catch (Exception e){
-
+        for(int b=1;b<=2;b++) {
+            if(b==1){
+                ta=ta+"_first";
+            }else{
+                ta=ta.replace("_first","");
             }
-        }
-        if(set!=null&&set.size()>0) {
-            String sql2 = "update " + ta + " set mark_time='" + time + "' where comp_full_name in (";
-            for (String s : set) {
-                sql2 = sql2 + "'" + s + "',";
+
+            String sql0 = "select id,comp_full_name from " + ta + " where (mark_time='' or mark_time is null) and cover_flag=2";
+            PreparedStatement ps0 = conn.prepareStatement(sql0);
+            ResultSet rs0 = ps0.executeQuery();
+
+            java.util.Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = simpleDateFormat.format(date);
+
+            Set<String> set = rd.getAllset("comp_in_name");
+            Set<String> ss = new HashSet<>();
+
+            int a = 0;
+            while (rs0.next()) {
+                try {
+                    String cname = rs0.getString(rs0.findColumn("comp_full_name"));
+                    String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
+                    String compid = UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+                    rd.set("tupu", compid);
+                    ss.add(cname);
+                    a++;
+                    System.out.println(a + "************************************************************");
+                } catch (Exception e) {
+
+                }
             }
-            sql2 = sql2.substring(0, sql2.length() - 1);
-            sql2 = sql2 + ")";
+            System.out.println(set.size());
+            if (set != null && set.size() > 0) {
+                int pp = 0;
+                String sql2 = "update " + ta + " set mark_time='" + time + "' where comp_full_name in (";
+                for (String s : set) {
+                    sql2 = sql2 + "'" + s.replace("'", "").replace("\"", "").replace("/", "").replace("\\", "") + "',";
+                    if (pp % 10000 == 0 && pp != 0) {
+                        sql2 = sql2.substring(0, sql2.length() - 1);
+                        sql2 = sql2 + ")";
+                        PreparedStatement ps2 = conn.prepareStatement(sql2);
+                        System.out.println(ps2.executeUpdate() + "    is update");
+                        sql2 = "update " + ta + " set mark_time='" + time + "' where comp_full_name in (";
+                    }
+                    pp++;
+                }
+                sql2 = sql2.substring(0, sql2.length() - 1);
+                sql2 = sql2 + ")";
+                PreparedStatement ps2 = conn.prepareStatement(sql2);
+                System.out.println(ps2.executeUpdate() + "    is update");
+            }
+            data2(ss);
+            boolean bo=check();
+            if(bo){
+                break;
+            }
 
-
-            PreparedStatement ps2 = conn.prepareStatement(sql2);
-            System.out.println(ps2.executeUpdate()+"    is update");
         }
-        data2(ss);
     }
 
     public static void data2(Set<String> set) throws SQLException {
@@ -100,7 +132,7 @@ public class tupucomp {
             for (int a = 4; a >= 0; a--) {
                 String sql = "update dw_dim_online.comp_tupu_level" + a + " set flag=1,mark=1 where comp_full_name in (";
                 for (String s : set) {
-                    sql = sql + "'" + s + "',";
+                    sql = sql + "'" + s.replace("'","").replace("\"","").replace("/","").replace("\\","") + "',";
                 }
                 sql = sql.substring(0, sql.length() - 1);
                 sql = sql + ")";
@@ -159,19 +191,19 @@ public class tupucomp {
                 }
             }
 
-            if(de==0) {
+            /*if(de==0) {
                 String sqls="update dw_dim_online.comp_tupu_level0 set flag=0,mark=0";
                 PreparedStatement pss=conn.prepareStatement(sqls);
                 pss.executeUpdate();
 
-                /*for(int qq=1;qq<=4;qq++){
+                for(int qq=1;qq<=4;qq++){
                     String sqq="truncate dw_dim_online.comp_tupu_level"+qq;
                     PreparedStatement psqq=conn.prepareStatement(sqq);
                     psqq.executeUpdate();
-                }*/
+                }
 
                 rd.del("tupuflag");
-            }
+            }*/
         }
     }
 

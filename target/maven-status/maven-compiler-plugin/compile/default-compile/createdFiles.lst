@@ -4,7 +4,6 @@ com\inno\controller\CleanController\Web$Ca.class
 com\inno\controller\SmallController\sendfinbu.class
 com\inno\controller\SmallController\teambu$2.class
 com\inno\controller\SmallController\sendcomp.class
-com\inno\controller\SmallController\sendcomp$1.class
 com\inno\controller\CleanController\Shortname.class
 com\inno\controller\CleanController\Logo$Ca.class
 test\sendlin.class
@@ -12,4 +11,3 @@ com\inno\controller\CleanController\Logo$3.class
 com\inno\controller\CleanController\Web$3.class
 com\inno\controller\SmallController\tupucomp.class
 etl\kejijinrong\zhixiashi.class
-com\inno\controller\SmallController\sendcomp$2.class

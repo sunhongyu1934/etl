@@ -50,10 +50,10 @@ public class sendcomp {
         rd=new RedisClu();
     }
     public static void main(String args[]) throws SQLException, InterruptedException {
-        sendcomp s=new sendcomp();
-        Ca c=s.new Ca();
+        //sendcomp s=new sendcomp();
+        //Ca c=s.new Ca();
         String ta=args[0];
-        ExecutorService pool= Executors.newCachedThreadPool();
+        /*ExecutorService pool= Executors.newCachedThreadPool();
         pool.submit(new Runnable() {
             @Override
             public void run() {
@@ -89,7 +89,7 @@ public class sendcomp {
                 break;
             }
             Thread.sleep(2000);
-        }
+        }*/
         data(ta);
     }
 
@@ -114,7 +114,7 @@ public class sendcomp {
     }
 
     public static void delete(String ta,Ca c) throws SQLException, InterruptedException {
-        String[] tables=new String[]{"tyc.tyc_main","tyc.tyc_gudongxin","tyc.tyc_out_investment","tyc.tyc_core_team","tyc.tyc_webcat"};
+        String[] tables=new String[]{"tyc.tyc_main","tyc.tyc_gudongxin","tyc.tyc_out_investment","tyc.tyc_core_team","tyc.tyc_webcat","tyc_company_bidding"};
         List<String> list=new ArrayList<>();
         String sqlq="select DISTINCT t_id from tyc.tyc_jichu_quan where quan_cheng in (select comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and (cover_flag=1 or cover_flag=2))";
         PreparedStatement psq=conn.prepareStatement(sqlq);
@@ -133,89 +133,124 @@ public class sendcomp {
         }
 
 
-        List<String> listl=new ArrayList<>();
-        String sqll="select DISTINCT comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and (cover_flag=1 or cover_flag=2)";
-        PreparedStatement psl=conn.prepareStatement(sqll);
-        ResultSet rsl=psl.executeQuery();
-        while (rsl.next()){
-            listl.add(rsl.getString(rsl.findColumn("comp_full_name")));
-        }
-
-        if(listl!=null&&listl.size()>0) {
-            System.out.println("begin delete tyc_jichu_quan");
-            for (String sq : listl) {
-                c.fang("tyc.tyc_jichu_quan###"+sq);
+        for(int a=1;a<=2;a++) {
+            if(a==1){
+                ta=ta+"_first";
+            }else{
+                ta=ta.replace("_first","");
+            }
+            List<String> listl = new ArrayList<>();
+            String sqll = "select DISTINCT comp_full_name from " + ta + " where (mark_time='' or mark_time is null) and (cover_flag=1 or cover_flag=2)";
+            PreparedStatement psl = conn.prepareStatement(sqll);
+            ResultSet rsl = psl.executeQuery();
+            while (rsl.next()) {
+                listl.add(rsl.getString(rsl.findColumn("comp_full_name")));
             }
 
-            System.out.println("delete tyc_jichu_quan success");
+            if (listl != null && listl.size() > 0) {
+                System.out.println("begin delete tyc_jichu_quan");
+                for (String sq : listl) {
+                    c.fang("tyc.tyc_jichu_quan###" + sq);
+                }
+
+                System.out.println("delete tyc_jichu_quan success");
+            }
+            boolean bo=check();
+            if(bo){
+                break;
+            }
         }
     }
 
-    public static void data(String ta) throws SQLException {
-        String sql0="select id,comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and cover_flag=1 and comp_full_name!='' and comp_full_name is not null";
-        PreparedStatement ps0=conn.prepareStatement(sql0);
-        ResultSet rs0=ps0.executeQuery();
-
-        String sql9="select id,comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and cover_flag=2 and comp_full_name!='' and comp_full_name is not null";
-        PreparedStatement ps9=conn.prepareStatement(sql9);
-        ResultSet rs9=ps9.executeQuery();
-
-        String sql="select id,comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and comp_full_name not in (select quan_cheng from tyc.tyc_jichu_quan) and comp_full_name not in (select quan_cheng from tianyancha.tyc_jichu_quan) and comp_full_name!='' and comp_full_name is not null";
+    public static boolean check() throws SQLException {
+        String sql="select id from innotree_data_financing.comp_name_bulu_first where (mark_time='' or mark_time is null) limit 10";
         PreparedStatement ps=conn.prepareStatement(sql);
         ResultSet rs=ps.executeQuery();
-
-
-        String sql3="select id,comp_full_name from "+ta+" where (mark_time='' or mark_time is null) and comp_full_name!='' and comp_full_name is not null";
-        PreparedStatement ps3=conn.prepareStatement(sql3);
-        ResultSet rs3=ps3.executeQuery();
-
-
-        int a=0;
-
-        while (rs3.next()){
-            String cname=rs3.getString(rs3.findColumn("comp_full_name"));
-
-            String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
-            String compid=UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
-
-            rd.set("comp_in",compid);
-            rd.set("comp_in_name",cname);
-            a++;
-            System.out.println(a+"--------------------------------------------------------");
-        }
-
-
+        boolean bo=false;
         while (rs.next()){
-            String cname=rs.getString(rs.findColumn("comp_full_name"));
-
-            rd.set("comp_zl",cname);
-
-            a++;
-            System.out.println(a+"******************************************");
+            bo=true;
         }
+        return bo;
+    }
 
-        while (rs0.next()){
-            String cname=rs0.getString(rs0.findColumn("comp_full_name"));
-            String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
-            String compid=UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+    public static void data(String ta) throws SQLException {
+        for(int b=1;b<=2;b++) {
+            if(b==1){
+                ta=ta+"_first";
+            }else{
+                ta=ta.replace("_first","");
+            }
 
-            rd.set("comp_zl",cname);
-            rd.set("comp_cover_in",compid);
+            String sql0 = "select id,comp_full_name from " + ta + " where (mark_time='' or mark_time is null) and cover_flag=1 and comp_full_name!='' and comp_full_name is not null";
+            PreparedStatement ps0 = conn.prepareStatement(sql0);
+            ResultSet rs0 = ps0.executeQuery();
 
-            a++;
-            System.out.println(a+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        }
+            String sql9 = "select id,comp_full_name from " + ta + " where (mark_time='' or mark_time is null) and cover_flag=2 and comp_full_name!='' and comp_full_name is not null";
+            PreparedStatement ps9 = conn.prepareStatement(sql9);
+            ResultSet rs9 = ps9.executeQuery();
 
-        while (rs9.next()){
-            String cname=rs9.getString(rs9.findColumn("comp_full_name"));
-            String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
-            String compid=UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+            String sql = "select id,comp_full_name from " + ta + " where (mark_time='' or mark_time is null) and comp_full_name not in (select quan_cheng from tyc.tyc_jichu_quan) and comp_full_name not in (select quan_cheng from tianyancha.tyc_jichu_quan) and comp_full_name!='' and comp_full_name is not null";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
-            rd.set("comp_zl",cname);
-            rd.set("comp_cover_in",compid);
 
-            a++;
-            System.out.println(a+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            String sql3 = "select id,comp_full_name from " + ta + " where (mark_time='' or mark_time is null) and comp_full_name!='' and comp_full_name is not null";
+            PreparedStatement ps3 = conn.prepareStatement(sql3);
+            ResultSet rs3 = ps3.executeQuery();
+
+
+            int a = 0;
+
+            while (rs3.next()) {
+                String cname = rs3.getString(rs3.findColumn("comp_full_name"));
+
+                String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
+                String compid = UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+
+                rd.set("comp_in", compid);
+                rd.set("comp_in_name", cname);
+                a++;
+                System.out.println(a + "--------------------------------------------------------");
+            }
+
+
+            while (rs.next()) {
+                String cname = rs.getString(rs.findColumn("comp_full_name"));
+
+                rd.set("comp_zl", cname);
+
+                a++;
+                System.out.println(a + "******************************************");
+            }
+
+            while (rs0.next()) {
+                String cname = rs0.getString(rs0.findColumn("comp_full_name"));
+                String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
+                String compid = UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+
+                rd.set("comp_zl", cname);
+                rd.set("comp_cover_in", compid);
+
+                a++;
+                System.out.println(a + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            }
+
+            while (rs9.next()) {
+                String cname = rs9.getString(rs9.findColumn("comp_full_name"));
+                String acname = FenciUtils.chuli(cname.replace("省", "").replace("市", "").replace("区", "").replace("(", "").replace(")", "").replace("（", "").replace("）", "").replace(" ", "").replaceAll("\\s", "").replace(" ", "").trim());
+                String compid = UnsignedLong.valueOf(getMD5String(acname).substring(8, 24), 16).toString();
+
+                rd.set("comp_zl", cname);
+                rd.set("comp_cover_in", compid);
+
+                a++;
+                System.out.println(a + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            }
+            boolean bo=check();
+            System.out.println(bo);
+            if(bo){
+                break;
+            }
         }
 
     }
